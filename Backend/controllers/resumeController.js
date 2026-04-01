@@ -211,5 +211,10 @@ ${resumeText}`
     }
 };
 
+// ---------------------------------------------------------
+// FUNCTION 5: Find Relevant Job Portals (NAYA FEATURE)
+// ---------------------------------------------------------
+const findJobPortals = async (req, res) => {
+
 // ✅ FINAL EXPORT
 module.exports = { generateResumeAndRoadmap, analyzeResumeMatch, generateInterviewQuestions, buildTailoredResume };
