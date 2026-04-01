@@ -138,24 +138,8 @@ function App() {
         </div>
       )}
     </div>
-      
-      {/* 3. Analyze Button */}
-      
-      <button onClick={handleAnalyze} disabled={loading} style={{ padding: "12px 24px", fontSize: "16px", cursor: "pointer" }}>
-        {loading ? "Analyzing Match & Generating Roadmap..." : "Analyze Resume & Generate Roadmap"}
-      </button>
-
-      {/* 4. AI Result Section */}
-      {/* Karan: Ye dibba tabhi dikhega jab 'result' state mein kuch text hoga (Conditional Rendering) */}
-      {result && (
-        
-        <div style={{ whiteSpace: 'pre-wrap', textAlign: 'left', padding: '20px', marginTop: '30px', backgroundColor: '#1e1e1e', borderRadius: '8px', border: '1px solid #444' }}>
-          <h3>ATS Analysis & Career Roadmap:</h3>
-          <p>{result}</p> 
-        </div>
-      )}
-    </div>
   );
 }
 
-export default App;
+export default App;      
+     
