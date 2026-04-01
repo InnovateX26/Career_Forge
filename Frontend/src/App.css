@@ -169,6 +169,7 @@ body {
 .result-box h3 { margin-top: 0; margin-bottom: 15px; font-size: 1.1rem; }
 
 .result-roadmap h3 { color: #60a5fa; }
+.result-questions h3 { color: #34d399; }
 
 /* 🔵 1. Analyze Button */
 .btn-analyze { background: linear-gradient(135deg, #0072ff, #00c6ff); box-shadow: 0 5px 20px rgba(0, 114, 255, 0.4); }
