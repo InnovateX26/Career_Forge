@@ -197,6 +197,7 @@ const speakText = (text) => {
               onClick={() => isSpeaking ? stopSpeaking() : speakText(questions)}
               style={{
                 background: isSpeaking ? '#ef4444' : '#10b981',
+                color: 'white', border: 'none', padding: '8px 16px', borderRadius: '50px',
 
         </div>
 
