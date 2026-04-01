@@ -111,6 +111,12 @@ function App() {
           style={{ width: "100%", padding: "10px" }}
         />
       </div>
+
+      {/* 3. Action Buttons */}
+      <div style={{ display: 'flex', gap: '15px', justifyContent: 'center', flexWrap: 'wrap' }}>
+        <button onClick={handleAnalyze} disabled={loading} style={{ padding: "12px 24px", fontSize: "16px", cursor: "pointer", backgroundColor: "#3498db", color: "white", border: "none", borderRadius: "5px" }}>
+          {loading ? "Analyzing Match..." : "Analyze Resume & Generate Roadmap"}
+        </button>
       
       {/* 3. Analyze Button */}
       
