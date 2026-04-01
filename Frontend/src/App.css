@@ -84,18 +84,19 @@ body {
 }
 
 /* 📁 File Input & Choose File Button */
-.file-input { margin-bottom: 15px; color: #94a3b8; }
+.file-input { margin-bottom: 15px; color: #94a3b8; font-size: 0.9rem; }
 .file-input::file-selector-button {
   background: #334155;
-  color: white;
+  color: #f8fafc;
   border: none;
-  padding: 8px 16px;
+  padding: 6px 12px;
   border-radius: 6px;
   cursor: pointer;
-  margin-right: 15px;
+  margin-right: 12px;
+  font-weight: 500;
   transition: background 0.2s;
-  font-family: 'Poppins', sans-serif;
 }
+
 .file-input::file-selector-button:hover { background: #475569; }
 
 /* 🎛️ Action Buttons */
