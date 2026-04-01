@@ -27,6 +27,8 @@ const speakText = (text) => {
   if ('speechSynthesis' in window) {
     window.speechSynthesis.cancel();
 
+    const cleanText = text.replace(/[*#_]/g, '');
+
   const handleFileUpload = (e) => {
     const file = e.target.files[0];
     if (!file) return; 
