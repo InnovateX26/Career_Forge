@@ -92,6 +92,11 @@ function App() {
       setIsListening(false);
     };
 
+    recognition.onend = () => setIsListening(false);
+
+    recognition.start();
+  };
+
 
 
   const downloadPDF = () => {
