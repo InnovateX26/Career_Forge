@@ -130,7 +130,7 @@ function App() {
           {loadingP && <span className="spinner"></span>}
           {loadingP ? "Searching..." : "Find Job Portals 🌍"}
         </button>
-        
+
       </div>
 
       {/* AI Results */}
@@ -157,5 +157,12 @@ function App() {
     </div>
   );
 }
+
+{portals && (
+        <div className="result-box result-portals">
+          <h3 style={{ color: '#fcd34d', marginTop: 0 }}>🌍 Best Platforms to Apply:</h3>
+          <p>{portals}</p> 
+        </div>
+      )}
 
 export default App;
