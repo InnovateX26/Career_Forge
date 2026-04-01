@@ -31,6 +31,7 @@ const speakText = (text) => {
 
     const utterance = new SpeechSynthesisUtterance(cleanText);
     utterance.rate = 0.95;
+    utterance.pitch = 1;
 
   const handleFileUpload = (e) => {
     const file = e.target.files[0];
