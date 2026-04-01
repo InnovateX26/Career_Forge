@@ -10,3 +10,8 @@ app.use(express.json());
 const resumeRoutes = require('./routes/resumeRoutes');
 app.use('/api/resume', resumeRoutes);
 
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+    console.log(`server is running on port ${PORT}`);
+});
+
