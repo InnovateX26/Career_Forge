@@ -199,6 +199,11 @@ const speakText = (text) => {
                 background: isSpeaking ? '#ef4444' : '#10b981',
                 color: 'white', border: 'none', padding: '8px 16px', borderRadius: '50px',
                 cursor: 'pointer', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '8px',
+                boxShadow: '0 4px 6px rgba(0,0,0,0.2)', transition: '0.3s'
+              }}
+            >
+              
+            </button>
 
         </div>
 
