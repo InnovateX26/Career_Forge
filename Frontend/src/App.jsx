@@ -30,6 +30,7 @@ const speakText = (text) => {
     const cleanText = text.replace(/[*#_]/g, '');
 
     const utterance = new SpeechSynthesisUtterance(cleanText);
+    utterance.rate = 0.95;
 
   const handleFileUpload = (e) => {
     const file = e.target.files[0];
