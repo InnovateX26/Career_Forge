@@ -1,47 +1,64 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
-/* 🌌 Premium Enterprise Background */
+/* 🌌 Global Reset & Background */
 body {
   margin: 0;
   min-height: 100vh;
-  background-color: #09090b;
-  color: #ededed;
+  background-color: #09090b; /* Deep Premium Black */
+  color: #fafafa;
   font-family: 'Inter', sans-serif;
   overflow-x: hidden;
 }
 
-/* 💠 Layout Wrapper (For balancing Header, Content, Footer) */
+/* 💠 Main Wrapper to keep footer at bottom */
 .app-wrapper {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  position: relative;
 }
 
-/* 🔵 TOP NAVBAR */
+/* 💠 Background Grid & Glows */
+.bg-grid {
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  background-image: linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 40px 40px;
+  z-index: -1;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: radial-gradient(circle at 50% -10%, rgba(59, 130, 246, 0.08), transparent 40%);
+  z-index: -1;
+}
+
+/* 🔵 PREMIUM NAVBAR */
 .navbar {
   position: fixed;
   top: 0; left: 0; right: 0;
-  height: 70px;
+  height: 65px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 5%;
-  background: rgba(9, 9, 11, 0.7);
+  padding: 0 6%;
+  background: rgba(9, 9, 11, 0.8);
   backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   z-index: 100;
 }
 
 .nav-logo {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   font-weight: 800;
-  color: #ffffff;
   letter-spacing: -0.5px;
 }
 
-.nav-logo .ai-text {
-  background: linear-gradient(135deg, #00c6ff, #0072ff);
+.ai-text {
+  background: linear-gradient(135deg, #3b82f6, #60a5fa);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -49,114 +66,182 @@ body {
 .nav-badge {
   background: rgba(59, 130, 246, 0.1);
   color: #60a5fa;
-  padding: 6px 15px;
-  border-radius: 50px;
-  font-size: 0.85rem;
-  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 700;
   border: 1px solid rgba(59, 130, 246, 0.2);
-  letter-spacing: 0.5px;
 }
 
-/* 💠 Animated Moving Background Orbs */
-body::before, body::after {
-  content: '';
-  position: fixed;
-  width: 50vw; height: 50vw;
-  border-radius: 50%; filter: blur(100px);
-  z-index: -2;
-  animation: float 15s infinite alternate ease-in-out;
-}
-body::before { background: rgba(0, 114, 255, 0.07); top: -10%; left: -10%; }
-body::after { background: rgba(139, 92, 246, 0.07); bottom: -10%; right: -10%; animation-delay: -5s; }
-
-@keyframes float {
-  0% { transform: translate(0, 0) scale(1); }
-  100% { transform: translate(50px, 50px) scale(1.1); }
-}
-
-.bg-grid {
-  position: fixed;
-  top: 0; left: 0; width: 100vw; height: 100vh;
-  background-image: linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px),
-                    linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px);
-  background-size: 40px 40px; z-index: -1;
-}
-
-/* 📦 Main Container (Centered between Nav and Footer) */
+/* 📦 MAIN CONTAINER */
 .container {
   width: 100%;
-  max-width: 800px;
-  margin: 100px auto 40px auto; /* 100px top margin to avoid hiding behind navbar */
+  max-width: 850px;
+  margin: 100px auto 50px auto; /* Margin for Nav and Footer */
   padding: 0 20px;
-  flex: 1; /* Yeh footer ko neeche dhakel dega */
+  flex: 1;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  gap: 25px;
   box-sizing: border-box;
 }
 
 .subtitle {
-  text-align: center; color: #a1a1aa; margin-bottom: 35px; font-size: 1.05rem; line-height: 1.5;
-}
-
-/* 🪟 Clean Glass Cards */
-.card {
-  width: 100%; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 16px; padding: 32px; margin-bottom: 24px;
-  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); text-align: left; box-sizing: border-box;
-}
-.card h3 { margin-top: 0; color: #f4f4f5; font-size: 1.25rem; margin-bottom: 16px; font-weight: 600; }
-
-/* 📝 Inputs */
-.input-box {
-  width: 100%; background: rgba(0, 0, 0, 0.2); border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #e4e4e7; padding: 16px; border-radius: 12px; font-family: inherit; font-size: 0.95rem;
-  resize: vertical; box-sizing: border-box; transition: all 0.2s ease;
-}
-.input-box:focus { outline: none; border-color: #3b82f6; box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15); background: rgba(0, 0, 0, 0.4); }
-
-.file-input { margin-bottom: 15px; color: #a1a1aa; display: flex; align-items: center; width: 100%; font-size: 0.9rem; }
-.file-input::file-selector-button {
-  background: #27272a; color: #f4f4f5; border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 8px 16px; border-radius: 8px; cursor: pointer; margin-right: 15px; font-weight: 500; transition: all 0.2s ease;
-}
-.file-input::file-selector-button:hover { background: #3f3f46; }
-
-/* 🎛️ Action Buttons */
-.button-group { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; width: 100%; margin-top: 10px; }
-@media (max-width: 600px) { .button-group { grid-template-columns: 1fr; } }
-
-.action-btn {
-  padding: 16px 20px; border: none; border-radius: 12px; font-size: 1rem; font-weight: 600;
-  color: white; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s ease;
-}
-.action-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none !important; }
-
-.btn-analyze { background: #2563eb; } .btn-analyze:hover:not(:disabled) { background: #1d4ed8; transform: translateY(-2px); box-shadow: 0 6px 15px rgba(37, 99, 235, 0.3); }
-.btn-interview { background: #059669; } .btn-interview:hover:not(:disabled) { background: #047857; transform: translateY(-2px); box-shadow: 0 6px 15px rgba(5, 150, 105, 0.3); }
-.btn-build { background: #7c3aed; } .btn-build:hover:not(:disabled) { background: #6d28d9; transform: translateY(-2px); box-shadow: 0 6px 15px rgba(124, 58, 237, 0.3); }
-.btn-portals { background: #ea580c; } .btn-portals:hover:not(:disabled) { background: #c2410c; transform: translateY(-2px); box-shadow: 0 6px 15px rgba(234, 88, 12, 0.3); }
-
-/* 🌀 Spinner & Results */
-.spinner { border: 2px solid rgba(255, 255, 255, 0.3); border-radius: 50%; border-top: 2px solid #ffffff; width: 18px; height: 18px; animation: spin 1s linear infinite; margin-right: 10px; }
-@keyframes spin { 100% { transform: rotate(360deg); } }
-
-.result-box {
-  margin-top: 30px; padding: 30px; border-radius: 16px; white-space: pre-wrap; line-height: 1.7;
-  font-size: 0.95rem; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.08);
-  text-align: left; width: 100%; box-sizing: border-box; animation: fadeIn 0.4s ease forwards;
-}
-@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-/* ⬇️ BOTTOM FOOTER */
-.footer {
   text-align: center;
-  padding: 24px;
-  background: rgba(9, 9, 11, 0.9);
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
   color: #a1a1aa;
+  font-size: 1rem;
+  margin-top: -10px;
+  margin-bottom: 20px;
+}
+
+/* 🪟 PROFESSIONAL CARDS */
+.card {
+  background: #18181b;
+  border: 1px solid #27272a;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  transition: border-color 0.3s ease;
+}
+
+.card:hover {
+  border-color: #3f3f46;
+}
+
+.card h3 {
+  margin: 0 0 16px 0;
+  font-size: 1.1rem;
+  color: #fafafa;
+  font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* 📝 INPUTS */
+.input-box {
+  width: 100%;
+  background: #09090b;
+  border: 1px solid #27272a;
+  color: #f4f4f5;
+  padding: 14px;
+  border-radius: 10px;
+  font-family: inherit;
   font-size: 0.95rem;
+  line-height: 1.5;
+  resize: vertical;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease;
+}
+
+.input-box:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 1px #3b82f6;
+}
+
+.file-input {
+  margin-bottom: 12px;
+  font-size: 0.85rem;
+  color: #a1a1aa;
+}
+
+.file-input::file-selector-button {
+  background: #27272a;
+  color: #fff;
+  border: 1px solid #3f3f46;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-right: 12px;
+  transition: 0.2s;
+}
+
+.file-input::file-selector-button:hover {
+  background: #3f3f46;
+}
+
+/* 🎛️ BUTTON GROUP GRID */
+.button-group {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
   width: 100%;
 }
-.footer strong { color: #00c6ff; font-weight: 600; }
+
+@media (max-width: 600px) {
+  .button-group { grid-template-columns: 1fr; }
+}
+
+.action-btn {
+  padding: 14px;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-analyze { background: #2563eb; }
+.btn-interview { background: #059669; }
+.btn-build { background: #7c3aed; }
+.btn-portals { background: #d97706; }
+
+.action-btn:hover { filter: brightness(1.1); transform: translateY(-1px); }
+.action-btn:active { transform: translateY(0); }
+
+/* 📦 RESULT BOXES */
+.result-box {
+  background: #18181b;
+  border: 1px solid #27272a;
+  border-left: 4px solid #3b82f6;
+  border-radius: 12px;
+  padding: 24px;
+  margin-top: 10px;
+  line-height: 1.7;
+  font-size: 0.95rem;
+  color: #e4e4e7;
+}
+
+.result-box h3 {
+  margin-top: 0;
+  color: #fff;
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+}
+
+/* 🎤 MIC BUTTON PULSE */
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4); }
+  70% { box-shadow: 0 0 0 10px rgba(59, 130, 246, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+}
+
+/* 🌀 SPINNER */
+.spinner {
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-top: 2px solid #fff;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  animation: spin 0.8s linear infinite;
+  margin-right: 10px;
+}
+@keyframes spin { 100% { transform: rotate(360deg); } }
+
+/* ⬇️ FOOTER */
+.footer {
+  text-align: center;
+  padding: 30px;
+  background: #09090b;
+  border-top: 1px solid #27272a;
+  color: #71717a;
+  font-size: 0.85rem;
+}
+
+.footer strong { color: #3b82f6; }
