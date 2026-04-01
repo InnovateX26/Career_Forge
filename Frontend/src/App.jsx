@@ -47,6 +47,10 @@ function App() {
       .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
       .replace(/\n/g, '<br/>');
 
+      // PDF specific styling
+
+      tempContainer.style.padding = '30px';
+
   const downloadPDF = () => {
     window.print();
   };
