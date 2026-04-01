@@ -1,247 +1,184 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+/* 🌐 Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@600;800&display=swap');
 
-/* 🌌 Global Reset & Background */
+/* 🌌 GLOBAL BACKGROUND */
 body {
   margin: 0;
   min-height: 100vh;
-  background-color: #09090b; /* Deep Premium Black */
-  color: #fafafa;
   font-family: 'Inter', sans-serif;
+  color: #ededed;
   overflow-x: hidden;
-}
 
-/* 💠 Main Wrapper to keep footer at bottom */
-.app-wrapper {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+  background: linear-gradient(135deg, #0f172a, #020617);
   position: relative;
 }
 
-/* 💠 Background Grid & Glows */
-.bg-grid {
-  position: fixed;
-  top: 0; left: 0; width: 100vw; height: 100vh;
-  background-image: linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px),
-                    linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px);
-  background-size: 40px 40px;
+/* 🔵 Glow Effects */
+body::before,
+body::after {
+  content: "";
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  filter: blur(120px);
   z-index: -1;
 }
 
 body::before {
-  content: '';
-  position: fixed;
-  top: 0; left: 0; width: 100%; height: 100%;
-  background: radial-gradient(circle at 50% -10%, rgba(59, 130, 246, 0.08), transparent 40%);
-  z-index: -1;
+  background: rgba(0, 242, 254, 0.25);
+  top: -100px;
+  left: -100px;
+  animation: float1 10s ease-in-out infinite alternate;
 }
 
-/* 🔵 PREMIUM NAVBAR */
-.navbar {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  height: 65px;
+body::after {
+  background: rgba(139, 92, 246, 0.25);
+  bottom: -100px;
+  right: -100px;
+  animation: float2 12s ease-in-out infinite alternate;
+}
+
+/* 🌀 Animations */
+@keyframes float1 {
+  from { transform: translateY(0px); }
+  to { transform: translateY(40px); }
+}
+
+@keyframes float2 {
+  from { transform: translateY(0px); }
+  to { transform: translateY(-40px); }
+}
+
+/* 📦 Container */
+.container {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 20px;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
-  padding: 0 6%;
-  background: rgba(9, 9, 11, 0.8);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  z-index: 100;
+  box-sizing: border-box;
 }
 
-.nav-logo {
-  font-size: 1.4rem;
+/* 🌟 Title */
+.title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 3.2rem;
   font-weight: 800;
-  letter-spacing: -0.5px;
+  text-align: center;
+  margin-bottom: 10px;
+  color: #ffffff;
+  text-shadow: 0 0 15px rgba(0, 242, 254, 0.5);
 }
 
-.ai-text {
-  background: linear-gradient(135deg, #3b82f6, #60a5fa);
+.title .ai-text {
+  background: linear-gradient(135deg, #00f2fe, #4facfe);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.nav-badge {
-  background: rgba(59, 130, 246, 0.1);
-  color: #60a5fa;
-  padding: 5px 12px;
-  border-radius: 6px;
-  font-size: 0.75rem;
-  font-weight: 700;
-  border: 1px solid rgba(59, 130, 246, 0.2);
-}
-
-/* 📦 MAIN CONTAINER */
-.container {
-  width: 100%;
-  max-width: 850px;
-  margin: 100px auto 50px auto; /* Margin for Nav and Footer */
-  padding: 0 20px;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
-  box-sizing: border-box;
-}
-
+/* 📝 Subtitle */
 .subtitle {
   text-align: center;
   color: #a1a1aa;
-  font-size: 1rem;
-  margin-top: -10px;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
+  font-size: 1.1rem;
+  max-width: 600px;
 }
 
-/* 🪟 PROFESSIONAL CARDS */
+/* 🪟 Cards */
 .card {
-  background: #18181b;
-  border: 1px solid #27272a;
+  width: 100%;
+  max-width: 750px;
+  background: rgba(15, 23, 42, 0.5);
   border-radius: 16px;
-  padding: 24px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-  transition: border-color 0.3s ease;
+  padding: 30px;
+  margin-bottom: 30px;
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+  text-align: center;
+  transition: 0.3s;
 }
 
 .card:hover {
-  border-color: #3f3f46;
+  transform: translateY(-5px);
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.8);
 }
 
 .card h3 {
-  margin: 0 0 16px 0;
-  font-size: 1.1rem;
-  color: #fafafa;
-  font-weight: 600;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  margin-top: 0;
+  color: #f8fafc;
+  font-size: 1.4rem;
+  margin-bottom: 20px;
 }
 
-/* 📝 INPUTS */
+/* 📝 Inputs */
 .input-box {
   width: 100%;
-  background: #09090b;
-  border: 1px solid #27272a;
-  color: #f4f4f5;
-  padding: 14px;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: #e2e8f0;
+  padding: 16px;
   border-radius: 10px;
-  font-family: inherit;
-  font-size: 0.95rem;
-  line-height: 1.5;
+  font-size: 1rem;
   resize: vertical;
   box-sizing: border-box;
-  transition: border-color 0.2s ease;
+  transition: 0.3s;
 }
 
 .input-box:focus {
   outline: none;
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 1px #3b82f6;
+  border-color: #00f2fe;
+  box-shadow: 0 0 10px rgba(0, 242, 254, 0.4);
 }
 
-.file-input {
-  margin-bottom: 12px;
-  font-size: 0.85rem;
-  color: #a1a1aa;
+/* 📁 File Input */
+input[type="file"] {
+  margin: 10px 0;
+  color: #ccc;
 }
 
-.file-input::file-selector-button {
-  background: #27272a;
-  color: #fff;
-  border: 1px solid #3f3f46;
-  padding: 8px 16px;
-  border-radius: 6px;
-  cursor: pointer;
-  margin-right: 12px;
-  transition: 0.2s;
-}
-
-.file-input::file-selector-button:hover {
-  background: #3f3f46;
-}
-
-/* 🎛️ BUTTON GROUP GRID */
-.button-group {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
-  width: 100%;
-}
-
-@media (max-width: 600px) {
-  .button-group { grid-template-columns: 1fr; }
-}
-
-.action-btn {
-  padding: 14px;
+/* 🔘 Button */
+button {
+  margin-top: 20px;
+  padding: 12px 25px;
   border: none;
   border-radius: 10px;
-  font-size: 0.95rem;
+  font-size: 1rem;
   font-weight: 600;
-  color: white;
   cursor: pointer;
-  transition: all 0.2s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background: linear-gradient(135deg, #00f2fe, #4facfe);
+  color: #000;
+  transition: 0.3s;
 }
 
-.btn-analyze { background: #2563eb; }
-.btn-interview { background: #059669; }
-.btn-build { background: #7c3aed; }
-.btn-portals { background: #d97706; }
+button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(0, 242, 254, 0.6);
+}
 
-.action-btn:hover { filter: brightness(1.1); transform: translateY(-1px); }
-.action-btn:active { transform: translateY(0); }
-
-/* 📦 RESULT BOXES */
+/* 📊 Result Box */
 .result-box {
-  background: #18181b;
-  border: 1px solid #27272a;
-  border-left: 4px solid #3b82f6;
+  width: 100%;
+  max-width: 750px;
+  background: rgba(0, 0, 0, 0.5);
   border-radius: 12px;
-  padding: 24px;
-  margin-top: 10px;
-  line-height: 1.7;
-  font-size: 0.95rem;
-  color: #e4e4e7;
+  padding: 20px;
+  margin-top: 20px;
+  text-align: left;
+  border: 1px solid rgba(255,255,255,0.1);
 }
 
-.result-box h3 {
-  margin-top: 0;
-  color: #fff;
-  font-size: 1.2rem;
-  margin-bottom: 15px;
-}
+/* 📱 Responsive */
+@media (max-width: 600px) {
+  .title {
+    font-size: 2.2rem;
+  }
 
-/* 🎤 MIC BUTTON PULSE */
-@keyframes pulse {
-  0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4); }
-  70% { box-shadow: 0 0 0 10px rgba(59, 130, 246, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+  .card {
+    padding: 20px;
+  }
 }
-
-/* 🌀 SPINNER */
-.spinner {
-  border: 2px solid rgba(255, 255, 255, 0.2);
-  border-top: 2px solid #fff;
-  border-radius: 50%;
-  width: 16px;
-  height: 16px;
-  animation: spin 0.8s linear infinite;
-  margin-right: 10px;
-}
-@keyframes spin { 100% { transform: rotate(360deg); } }
-
-/* ⬇️ FOOTER */
-.footer {
-  text-align: center;
-  padding: 30px;
-  background: #09090b;
-  border-top: 1px solid #27272a;
-  color: #71717a;
-  font-size: 0.85rem;
-}
-
-.footer strong { color: #3b82f6; }
