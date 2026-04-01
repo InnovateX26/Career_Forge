@@ -27,6 +27,12 @@ body {
   letter-spacing: -1px;
 }
 
+.title .ai-text {
+  background: linear-gradient(to right, #3b82f6, #8b5cf6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 .subtitle {
   text-align: center;
   color: #94a3b8;
