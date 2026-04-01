@@ -198,6 +198,7 @@ const speakText = (text) => {
               style={{
                 background: isSpeaking ? '#ef4444' : '#10b981',
                 color: 'white', border: 'none', padding: '8px 16px', borderRadius: '50px',
+                cursor: 'pointer', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '8px',
 
         </div>
 
