@@ -62,3 +62,6 @@ body {
   box-sizing: border-box;
   transition: all 0.3s ease;
 }
+
+.input-box:focus { border-color: #00c6ff; box-shadow: 0 0 15px rgba(0, 198, 255, 0.3); }
+.file-input { margin-bottom: 15px; color: #94a3b8; }
