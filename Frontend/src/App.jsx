@@ -61,6 +61,13 @@ function App() {
       const response = await axios.post("http://localhost:5000/api/resume/questions", {
         jobDescription: jd
       });
+      setQuestions(response.data.data);
+    } catch (error) {
+      console.error("Error", error);
+      alert("Something went wrong!"); 
+    }
+    setLoadingQ(false);
+  };
 
   return (
     <div className="container">
