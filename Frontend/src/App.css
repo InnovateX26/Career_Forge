@@ -1,7 +1,7 @@
 /* 🌐 Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@600;800&display=swap');
 
-/* 🌌 GLOBAL BACKGROUND */
+/* 🌌 PREMIUM BACKGROUND */
 body {
   margin: 0;
   min-height: 100vh;
@@ -9,45 +9,44 @@ body {
   color: #ededed;
   overflow-x: hidden;
 
-  background: linear-gradient(135deg, #0f172a, #020617);
+  /* 🔥 Multi-layer Gradient */
+  background: radial-gradient(circle at 20% 30%, #0ea5e9 0%, transparent 25%),
+              radial-gradient(circle at 80% 70%, #8b5cf6 0%, transparent 25%),
+              linear-gradient(135deg, #020617, #0f172a, #020617);
+
   position: relative;
 }
 
-/* 🔵 Glow Effects */
-body::before,
-body::after {
+/* 🔲 Subtle Grid Overlay */
+body::before {
   content: "";
   position: absolute;
-  width: 500px;
-  height: 500px;
-  border-radius: 50%;
-  filter: blur(120px);
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
   z-index: -1;
 }
 
-body::before {
-  background: rgba(0, 242, 254, 0.25);
+/* 🔵 Floating Glow */
+body::after {
+  content: "";
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(0,242,254,0.2), transparent 70%);
   top: -100px;
   left: -100px;
-  animation: float1 10s ease-in-out infinite alternate;
+  filter: blur(120px);
+  z-index: -1;
+  animation: floatGlow 10s ease-in-out infinite alternate;
 }
 
-body::after {
-  background: rgba(139, 92, 246, 0.25);
-  bottom: -100px;
-  right: -100px;
-  animation: float2 12s ease-in-out infinite alternate;
-}
-
-/* 🌀 Animations */
-@keyframes float1 {
+/* 🌀 Animation */
+@keyframes floatGlow {
   from { transform: translateY(0px); }
-  to { transform: translateY(40px); }
-}
-
-@keyframes float2 {
-  from { transform: translateY(0px); }
-  to { transform: translateY(-40px); }
+  to { transform: translateY(60px); }
 }
 
 /* 📦 Container */
@@ -59,18 +58,17 @@ body::after {
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-sizing: border-box;
 }
 
 /* 🌟 Title */
 .title {
   font-family: 'Orbitron', sans-serif;
-  font-size: 3.2rem;
+  font-size: 3rem;
   font-weight: 800;
   text-align: center;
   margin-bottom: 10px;
   color: #ffffff;
-  text-shadow: 0 0 15px rgba(0, 242, 254, 0.5);
+  text-shadow: 0 0 20px rgba(0, 242, 254, 0.6);
 }
 
 .title .ai-text {
@@ -85,27 +83,26 @@ body::after {
   color: #a1a1aa;
   margin-bottom: 40px;
   font-size: 1.1rem;
-  max-width: 600px;
 }
 
 /* 🪟 Cards */
 .card {
   width: 100%;
   max-width: 750px;
-  background: rgba(15, 23, 42, 0.5);
+  background: rgba(15, 23, 42, 0.6);
   border-radius: 16px;
   padding: 30px;
   margin-bottom: 30px;
   backdrop-filter: blur(20px);
   border: 1px solid rgba(255,255,255,0.08);
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
-  text-align: center;
-  transition: 0.3s;
+  box-shadow: 0 10px 50px rgba(0, 0, 0, 0.7);
+  transition: 0.3s ease;
 }
 
 .card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.8);
+  transform: translateY(-6px);
+  border-color: rgba(0, 242, 254, 0.5);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9);
 }
 
 .card h3 {
@@ -118,26 +115,25 @@ body::after {
 /* 📝 Inputs */
 .input-box {
   width: 100%;
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(0, 0, 0, 0.5);
   border: 1px solid rgba(255,255,255,0.1);
   color: #e2e8f0;
   padding: 16px;
   border-radius: 10px;
   font-size: 1rem;
   resize: vertical;
-  box-sizing: border-box;
   transition: 0.3s;
 }
 
 .input-box:focus {
   outline: none;
   border-color: #00f2fe;
-  box-shadow: 0 0 10px rgba(0, 242, 254, 0.4);
+  box-shadow: 0 0 15px rgba(0, 242, 254, 0.6);
 }
 
 /* 📁 File Input */
 input[type="file"] {
-  margin: 10px 0;
+  margin-top: 10px;
   color: #ccc;
 }
 
@@ -157,19 +153,19 @@ button {
 
 button:hover {
   transform: scale(1.05);
-  box-shadow: 0 0 20px rgba(0, 242, 254, 0.6);
+  box-shadow: 0 0 25px rgba(0, 242, 254, 0.8);
 }
 
 /* 📊 Result Box */
 .result-box {
   width: 100%;
   max-width: 750px;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.6);
   border-radius: 12px;
   padding: 20px;
   margin-top: 20px;
-  text-align: left;
   border: 1px solid rgba(255,255,255,0.1);
+  line-height: 1.6;
 }
 
 /* 📱 Responsive */
