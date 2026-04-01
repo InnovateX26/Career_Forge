@@ -125,6 +125,12 @@ function App() {
           {loadingR && <span className="spinner"></span>}
           {loadingR ? "Building..." : "Auto-Tailor Resume 📝"}
         </button>
+
+        <button onClick={handleFindPortals} disabled={loadingP} className="action-btn btn-portals">
+          {loadingP && <span className="spinner"></span>}
+          {loadingP ? "Searching..." : "Find Job Portals 🌍"}
+        </button>
+        
       </div>
 
       {/* AI Results */}
