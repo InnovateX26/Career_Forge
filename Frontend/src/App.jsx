@@ -60,6 +60,7 @@ function App() {
         margin:       15,
       filename:     'CareerCraft_Tailored_Resume.pdf',
       image:        { type: 'jpeg', quality: 1 },
+      html2canvas:  { scale: 3 },
 
   const downloadPDF = () => {
     window.print();
