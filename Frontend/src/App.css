@@ -10,3 +10,9 @@ body {
   display: flex;
   justify-content: center;
 }
+
+.container {
+  width: 100%;
+  max-width: 850px;
+  padding: 40px 20px;
+}
