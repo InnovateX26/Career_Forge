@@ -111,6 +111,27 @@ ${finalResumeText}`
         if (!jobDescription) {
             return res.status(400).json({ error: "Job Description is required" });
         }
+        const response = await ai.models.generateContent({
+            model: "gemini-2.5-flash", // Stable model use kar rahe hain taaki 503 error na aaye
+            contents: `Act as an expert Technical Interviewer. 
+Based on the following Job Description, generate a list of highly probable interview questions for a fresher.
+
+Format strictly as:
+**🔥 Technical Questions:**
+1. [Question]
+2. [Question]
+3. [Question]
+
+**🤝 HR / Behavioral Questions:**
+1. [Question]
+2. [Question]
+
+**💡 Pro-Tip to crack this interview:** [1 short tip]
+
+---
+Job Description:
+${jobDescription}`
+        });
 
 
         const text = response.text;
