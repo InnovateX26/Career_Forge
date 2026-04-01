@@ -37,6 +37,8 @@ const speakText = (text) => {
     utterance.onend = () => setIsSpeaking(false);
     utterance.onerror = () => setIsSpeaking(false);
 
+    window.speechSynthesis.speak(utterance);
+
   const handleFileUpload = (e) => {
     const file = e.target.files[0];
     if (!file) return; 
