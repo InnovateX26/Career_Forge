@@ -153,6 +153,9 @@ body {
 }
 @keyframes spin { 100% { transform: rotate(360deg); } }
 
+/* 📦 Clean Result Boxes */
+.result-box {
+
 /* 🔵 1. Analyze Button */
 .btn-analyze { background: linear-gradient(135deg, #0072ff, #00c6ff); box-shadow: 0 5px 20px rgba(0, 114, 255, 0.4); }
 .btn-analyze:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0, 114, 255, 0.6); }
