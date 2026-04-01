@@ -33,6 +33,10 @@ const speakText = (text) => {
     utterance.rate = 0.95;
     utterance.pitch = 1;
 
+    utterance.onstart = () => setIsSpeaking(true);
+    utterance.onend = () => setIsSpeaking(false);
+    utterance.onerror = () => setIsSpeaking(false);
+
   const handleFileUpload = (e) => {
     const file = e.target.files[0];
     if (!file) return; 
