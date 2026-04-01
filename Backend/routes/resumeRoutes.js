@@ -15,6 +15,6 @@ router.post('/generate', generateResumeAndRoadmap);
 router.post('/analyze', upload.single('resumeFile'), analyzeResumeMatch);
 router.post('/questions', generateInterviewQuestions);
 
-router.post('/questions', generateInterviewQuestions);
+router.post('/build', buildTailoredResume);
 
 module.exports = router;
