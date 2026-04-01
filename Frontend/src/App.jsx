@@ -19,7 +19,11 @@ function App() {
   const [portals, setPortals] = useState("");
   const [loadingP, setLoadingP] = useState(false);
 
+  //AI Voice track
+
 const [isSpeaking, setIsSpeaking] = useState(false);
+
+const speakText = (text) => {
 
   const handleFileUpload = (e) => {
     const file = e.target.files[0];
