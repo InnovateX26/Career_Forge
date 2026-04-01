@@ -17,6 +17,7 @@ body {
   padding: 40px 20px;
 }
 
+/* 🌟 Typography & Headers */
 .title {
   font-size: 3.5rem;
   font-weight: 700;
@@ -37,6 +38,7 @@ body {
   font-size: 1.1rem;
 }
 
+/* 🃏 Glassmorphism Cards */
 .card {
   background: rgba(30, 41, 59, 0.4);
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -52,6 +54,7 @@ body {
 
 .card h3 { margin-top: 0; color: #f8fafc; font-size: 1.3rem; margin-bottom: 15px; }
 
+/* 📝 Inputs & Textareas */
 .input-box {
   width: 100%;
   background: rgba(15, 23, 42, 0.8);
@@ -68,7 +71,7 @@ body {
 
 .input-box:focus { border-color: #00c6ff; box-shadow: 0 0 15px rgba(0, 198, 255, 0.3); }
 
-/* ✅ File Input & Choose File Button */
+/* 📁 File Input & Choose File Button */
 .file-input { margin-bottom: 15px; color: #94a3b8; }
 .file-input::file-selector-button {
   background: #334155;
@@ -83,6 +86,7 @@ body {
 }
 .file-input::file-selector-button:hover { background: #475569; }
 
+/* 🎛️ Action Buttons */
 .button-group { display: flex; gap: 20px; justify-content: center; margin-top: 35px; flex-wrap: wrap; }
 
 .action-btn {
@@ -100,17 +104,21 @@ body {
 
 .action-btn:disabled { opacity: 0.6; cursor: not-allowed; }
 
-/* 🔵 Analyze Button */
+/* 🔵 1. Analyze Button */
 .btn-analyze { background: linear-gradient(135deg, #0072ff, #00c6ff); box-shadow: 0 5px 20px rgba(0, 114, 255, 0.4); }
 .btn-analyze:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0, 114, 255, 0.6); }
 
-/* 🟢 Interview Button */
+/* 🟢 2. Interview Button */
 .btn-interview { background: linear-gradient(135deg, #11998e, #38ef7d); box-shadow: 0 5px 20px rgba(56, 239, 125, 0.4); }
 .btn-interview:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(56, 239, 125, 0.6); }
 
-/* 🟠 Resume Build Button */
+/* 🟠 3. Resume Build Button */
 .btn-build { background: linear-gradient(135deg, #8a2387, #e94057, #f27121); box-shadow: 0 5px 20px rgba(233, 64, 87, 0.4); }
 .btn-build:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(233, 64, 87, 0.6); }
+
+/* 🟡 4. Job Portals Button */
+.btn-portals { background: linear-gradient(135deg, #f12711, #f5af19); box-shadow: 0 5px 20px rgba(245, 175, 25, 0.4); }
+.btn-portals:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(245, 175, 25, 0.6); }
 
 /* 🌀 Spinner Animation */
 .spinner {
@@ -129,13 +137,6 @@ body {
 .result-roadmap { background: rgba(15, 23, 42, 0.7); border-left: 5px solid #00c6ff; }
 .result-questions { background: rgba(6, 78, 59, 0.4); border-left: 5px solid #38ef7d; }
 .result-build { background: rgba(88, 28, 135, 0.4); border-left: 5px solid #e94057; }
-
-@keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
-
-.btn-portals { background: linear-gradient(135deg, #f12711, #f5af19); box-shadow: 0 5px 20px rgba(245, 175, 25, 0.4); }
-.btn-portals:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(245, 175, 25, 0.6); }
-
 .result-portals { background: rgba(120, 50, 0, 0.4); border-left: 5px solid #f5af19; }
 
-
-
+@keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
