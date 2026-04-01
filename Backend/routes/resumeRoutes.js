@@ -9,7 +9,8 @@ const {
     generateResumeAndRoadmap, 
     analyzeResumeMatch, 
     generateInterviewQuestions,
-    buildTailoredResume 
+    buildTailoredResume,
+    findJobPortals 
 } = require('../controllers/resumeController');
 
 router.post('/generate', generateResumeAndRoadmap);
