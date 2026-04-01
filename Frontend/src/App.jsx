@@ -94,7 +94,7 @@ const speakText = (text) => {
     setLoadingQ(false);
   };
 
-  // ✅ RESTORED: Auto-Build Resume Function (Ye delete ho gaya tha)
+  // ✅ RESTORED: Auto-Build Resume Function 
   const handleBuildResume = async () => {
     if (!jd) return alert("Please enter the Job Description first!");
     if (!resumeText) return alert("Please upload or paste your Current Resume!");
@@ -186,6 +186,13 @@ const speakText = (text) => {
           <p>{result}</p> 
         </div>
       )}
+
+      //add voice button
+
+      {questions && (
+        <div className="result-box result-questions">
+
+        
 
       {questions && (
         <div className="result-box result-questions">
