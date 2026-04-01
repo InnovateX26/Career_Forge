@@ -44,6 +44,7 @@ const speakText = (text) => {
   };
 
   const stopSpeaking = () => {
+    if ('speechSynthesis' in window) {
 
   const handleFileUpload = (e) => {
     const file = e.target.files[0];
