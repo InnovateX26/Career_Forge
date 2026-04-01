@@ -163,6 +163,8 @@ body {
   font-size: 0.95rem;
   background: #1e293b;
   border: 1px solid #334155;
+  animation: slideDown 0.3s ease;
+}
 
 /* 🔵 1. Analyze Button */
 .btn-analyze { background: linear-gradient(135deg, #0072ff, #00c6ff); box-shadow: 0 5px 20px rgba(0, 114, 255, 0.4); }
