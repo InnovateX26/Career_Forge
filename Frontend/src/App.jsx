@@ -135,3 +135,14 @@ function App() {
   const handleAnalyze = async () => {
     if (!jd) return alert("Please enter the Job Description.");
     if (!resumeText) return alert("Please upload or paste your Resume.");
+
+    setLoading(true); setResult(""); 
+    try {
+      const response = await axios.post("http://localhost:5000/api/resume/analyze", { jobDescription: jd, resumeText: resumeText });
+      setResult(response.data.data);
+    } catch (error) { 
+      console.error("API Error:", error.response?.data || error.message);
+      alert("Backend Error: " + (error.response?.data?.error || "Something went wrong.")); 
+    } 
+    setLoading(false);
+  };
