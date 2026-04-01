@@ -16,6 +16,7 @@ function App() {
   const [tailoredResume, setTailoredResume] = useState("");
   const [loadingR, setLoadingR] = useState(false);
 
+
   const handleFileUpload = (e) => {
     const file = e.target.files[0];
     if (!file) return; 
@@ -63,19 +64,18 @@ function App() {
   };
 
   const handleBuildResume = async () => {
+   const handleFindPortals = async () => {
     if (!jd) return alert("Please enter the Job Description first!");
-    if (!resumeText) return alert("Please upload or paste your Current Resume!");
     
-    setLoadingR(true); setTailoredResume(""); 
+    setLoadingP(true); setPortals(""); 
     try {
-      const response = await axios.post("http://localhost:5000/api/resume/build", { jobDescription: jd, resumeText: resumeText });
-      setTailoredResume(response.data.data);
+      const response = await axios.post("http://localhost:5000/api/resume/portals", { jobDescription: jd });
+      setPortals(response.data.data);
     } catch (error) { 
-      // 🧠 SMART ERROR HANDLING
       console.error("API Error:", error.response?.data || error.message);
-      alert("Backend Error: " + (error.response?.data?.error || "Check backend terminal, server might be down!")); 
+      alert("Backend Error: " + (error.response?.data?.error || "Check backend terminal!")); 
     }
-    setLoadingR(false);
+    setLoadingP(false);
   };
 
   return (
