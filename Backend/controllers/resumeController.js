@@ -226,5 +226,23 @@ const findJobPortals = async (req, res) => {
             model: "gemini-1.5-flash", 
             contents: `Act as an expert Career Counselor. Based on the following Job Description, provide a curated list of the best job portals, niche websites, and platforms where a candidate can find similar jobs.
 
+            Format strictly as:
+**🌍 Top Global Platforms:**
+- [Portal Name]: [Why it's good for this role]
+
+**🇮🇳 Best for India / Remote:**
+- [Portal Name]: [Why it's good]
+
+**🎯 Niche/Specialized Boards:**
+- [Portal Name]: [Why it's good]
+
+**💡 Quick Search Keywords:** [2-3 keywords to search on these portals]
+
+---
+Job Description:
+${jobDescription}`
+        });
+
+        
 // ✅ FINAL EXPORT
 module.exports = { generateResumeAndRoadmap, analyzeResumeMatch, generateInterviewQuestions, buildTailoredResume };
