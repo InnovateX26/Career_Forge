@@ -135,5 +135,7 @@ body {
 .btn-portals { background: linear-gradient(135deg, #f12711, #f5af19); box-shadow: 0 5px 20px rgba(245, 175, 25, 0.4); }
 .btn-portals:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(245, 175, 25, 0.6); }
 
+.result-portals { background: rgba(120, 50, 0, 0.4); border-left: 5px solid #f5af19; }
+
 
 
