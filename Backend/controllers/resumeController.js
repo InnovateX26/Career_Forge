@@ -160,6 +160,36 @@ const buildTailoredResume = async (req, res) => {
         if (!jobDescription || !resumeText) {
             return res.status(400).json({ error: "Job Description and Current Resume both are required to tailor it." });
         }
+        const response = await ai.models.generateContent({
+            model: "gemini-2.5-flash", 
+            contents: `Act as an Expert ATS Resume Writer. 
+Take the user's Current Resume and rewrite it to perfectly match the provided Job Description. 
+Highlight the most relevant skills, optimize bullet points with action verbs, and structure it professionally.
+
+Format strictly as a Professional Resume:
+**[Full Name / Placeholder]**
+**Contact Info:** [Placeholder]
+
+**Professional Summary:**
+[Write a strong 3-line summary tailored to the JD]
+
+**Core Competencies (Matched with JD):**
+- [Skill 1] | [Skill 2] | [Skill 3]
+
+**Experience / Projects:**
+[Rewrite the user's experience/projects to align with the job requirements]
+
+**Education:**
+[Keep user's education]
+
+---
+Job Description:
+${jobDescription}
+
+---
+Current Resume:
+${resumeText}`
+        });
 
         res.status(200).json({
             success: true,
