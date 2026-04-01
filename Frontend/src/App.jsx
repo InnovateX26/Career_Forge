@@ -61,6 +61,8 @@ function App() {
       filename:     'CareerCraft_Tailored_Resume.pdf',
       image:        { type: 'jpeg', quality: 1 },
       html2canvas:  { scale: 3 },
+      jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+    };
 
   const downloadPDF = () => {
     window.print();
