@@ -70,6 +70,11 @@ function App() {
   const startListening = () => {
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
+    if (!SpeechRecognition) {
+      alert("Oops! Your browser doesn't support Voice Input. Try Google Chrome.");
+      return;
+    }
+
   const downloadPDF = () => {
     window.print();
   };
