@@ -202,7 +202,8 @@ const speakText = (text) => {
                 boxShadow: '0 4px 6px rgba(0,0,0,0.2)', transition: '0.3s'
               }}
             >
-              
+            {isSpeaking ? '⏹️ Stop AI HR' : '▶️ Listen to AI HR'}
+
             </button>
 
         </div>
