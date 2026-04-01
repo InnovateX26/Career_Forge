@@ -21,9 +21,23 @@ function App() {
         setResumeText(event.target.result); 
       };
       reader.readAsText(file);
-      
+
     } else {
   
       alert("Smart Tip: Abhi ke liye apna resume .txt format mein upload karein, ya box mein direct paste karein!");
     }
   };
+
+  const handleAnalyze = async () => {
+   
+    if (!jd) return alert("Please enter Job Description!");
+    if (!resumeText) return alert("Please upload or paste your Resume!");
+    
+    setLoading(true);
+    setResult(""); 
+    
+    try {
+      const response = await axios.post("http://localhost:5000/api/resume/analyze", {
+        jobDescription: jd,
+        resumeText: resumeText
+      });
