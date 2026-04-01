@@ -39,7 +39,11 @@ function App() {
     try {
       const response = await axios.post("http://localhost:5000/api/resume/analyze", { jobDescription: jd, resumeText: resumeText });
       setResult(response.data.data);
-    } catch (error) { alert("Something went wrong!"); } 
+    } catch (error) { 
+      // 🧠 SMART ERROR HANDLING
+      console.error("API Error:", error.response?.data || error.message);
+      alert("Backend Error: " + (error.response?.data?.error || "Something went wrong!")); 
+    } 
     setLoading(false);
   };
 
@@ -50,11 +54,14 @@ function App() {
     try {
       const response = await axios.post("http://localhost:5000/api/resume/questions", { jobDescription: jd });
       setQuestions(response.data.data);
-    } catch (error) { alert("Something went wrong!"); }
+    } catch (error) { 
+      // 🧠 SMART ERROR HANDLING
+      console.error("API Error:", error.response?.data || error.message);
+      alert("Backend Error: " + (error.response?.data?.error || "Something went wrong!")); 
+    }
     setLoadingQ(false);
   };
 
-  // ✅ NAYA FUNCTION: Resume Auto-Tailor karne ke liye
   const handleBuildResume = async () => {
     if (!jd) return alert("Please enter the Job Description first!");
     if (!resumeText) return alert("Please upload or paste your Current Resume!");
@@ -63,7 +70,11 @@ function App() {
     try {
       const response = await axios.post("http://localhost:5000/api/resume/build", { jobDescription: jd, resumeText: resumeText });
       setTailoredResume(response.data.data);
-    } catch (error) { alert("Something went wrong!"); }
+    } catch (error) { 
+      // 🧠 SMART ERROR HANDLING
+      console.error("API Error:", error.response?.data || error.message);
+      alert("Backend Error: " + (error.response?.data?.error || "Check backend terminal, server might be down!")); 
+    }
     setLoadingR(false);
   };
 
@@ -98,7 +109,7 @@ function App() {
         />
       </div>
       
-      {/* Action Buttons (Ab 3 buttons hain) */}
+      {/* Action Buttons */}
       <div className="button-group">
         <button onClick={handleAnalyze} disabled={loading} className="action-btn btn-analyze">
           {loading && <span className="spinner"></span>}
@@ -110,14 +121,13 @@ function App() {
           {loadingQ ? "Generating..." : "Interview Qs 🎯"}
         </button>
 
-        {/* ✅ NAYA BUTTON: Resume Build */}
         <button onClick={handleBuildResume} disabled={loadingR} className="action-btn btn-build">
           {loadingR && <span className="spinner"></span>}
           {loadingR ? "Building..." : "Auto-Tailor Resume 📝"}
         </button>
       </div>
 
-      {/* AI Result: Roadmap */}
+      {/* AI Results */}
       {result && (
         <div className="result-box result-roadmap">
           <h3 style={{ color: '#00c6ff', marginTop: 0 }}>📊 ATS Analysis & Career Roadmap:</h3>
@@ -125,7 +135,6 @@ function App() {
         </div>
       )}
 
-      {/* AI Result: Interview Questions */}
       {questions && (
         <div className="result-box result-questions">
           <h3 style={{ color: '#38ef7d', marginTop: 0 }}>🎯 Custom Interview Questions:</h3>
@@ -133,7 +142,6 @@ function App() {
         </div>
       )}
 
-      {/* ✅ NAYA AI Result: Tailored Resume */}
       {tailoredResume && (
         <div className="result-box result-build">
           <h3 style={{ color: '#fca5a5', marginTop: 0 }}>📝 ATS-Optimized Tailored Resume:</h3>
