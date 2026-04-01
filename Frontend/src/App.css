@@ -1,14 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Inter:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
-/* 🌌 Animated Sci-Fi Background */
+/* 🌌 Premium Enterprise Background with Animation */
 body {
   margin: 0;
   min-height: 100vh;
-  background-color: #050b14;
-  background-image: 
-    radial-gradient(circle at 15% 50%, rgba(0, 242, 254, 0.15), transparent 25%),
-    radial-gradient(circle at 85% 30%, rgba(161, 140, 209, 0.15), transparent 25%);
-  color: #e2e8f0;
+  background-color: #09090b; /* Deep Premium Black */
+  color: #ededed;
   font-family: 'Inter', sans-serif;
   display: flex;
   justify-content: center;
@@ -17,216 +14,224 @@ body {
   overflow-x: hidden;
 }
 
-/* Subtle Grid overlay for that "Data Network" feel */
-body::before {
+/* 💠 Animated Moving Background Glowing Orbs */
+body::before, body::after {
   content: '';
   position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: linear-gradient(rgba(0, 242, 254, 0.03) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(0, 242, 254, 0.03) 1px, transparent 1px);
-  background-size: 30px 30px;
+  width: 50vw;
+  height: 50vw;
+  border-radius: 50%;
+  filter: blur(100px);
+  z-index: -2;
+  animation: float 15s infinite alternate ease-in-out;
+}
+
+body::before {
+  background: rgba(0, 114, 255, 0.07);
+  top: -10%;
+  left: -10%;
+}
+
+body::after {
+  background: rgba(139, 92, 246, 0.07);
+  bottom: -10%;
+  right: -10%;
+  animation-delay: -5s;
+}
+
+@keyframes float {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(50px, 50px) scale(1.1); }
+}
+
+/* Subtle Grid */
+.bg-grid {
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  background-image: linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 40px 40px;
   z-index: -1;
 }
 
 .container {
   width: 100%;
-  max-width: 850px; /* Centered content */
-  padding: 40px 20px;
+  max-width: 800px; /* Perfect width for readability */
+  padding: 50px 20px;
   display: flex;
   flex-direction: column;
-  align-items: center; /* Sab kuch center mein */
+  align-items: center; /* Center alignment */
 }
 
-/* 🌟 Title Styling (Just like the mockup) */
+/* 🌟 Title Styling (Clean & Sharp) */
 .title {
-  font-family: 'Orbitron', sans-serif; /* Futuristic Font */
   font-size: 3.5rem;
-  font-weight: 700;
+  font-weight: 800;
   text-align: center;
-  margin-bottom: 5px;
-  color: #fff;
-  text-shadow: 0 0 15px rgba(0, 242, 254, 0.6);
-  letter-spacing: 2px;
+  margin-bottom: 8px;
+  color: #ffffff;
+  letter-spacing: -1.5px;
+  text-shadow: none; /* Removed the messy glow */
 }
 
 .title .ai-text {
-  background: linear-gradient(to right, #00f2fe, #4facfe);
+  background: linear-gradient(135deg, #00c6ff, #0072ff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  text-shadow: none;
 }
 
 .subtitle {
   text-align: center;
-  color: #94a3b8;
-  margin-bottom: 50px;
+  color: #a1a1aa;
+  margin-bottom: 45px;
   font-size: 1.1rem;
-  max-width: 600px;
+  line-height: 1.5;
+  max-width: 650px;
 }
 
-/* 🪟 Glassmorphism Cards (Centered and Glowing) */
+/* 🪟 Clean Glass Cards */
 .card {
   width: 100%;
-  max-width: 750px;
-  background: rgba(15, 23, 42, 0.4); /* Transparent Dark */
-  backdrop-filter: blur(16px); /* Kaanch jaisa blur */
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(0, 242, 254, 0.2); /* Neon Blue Border */
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 16px;
-  padding: 30px;
-  margin-bottom: 30px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(0, 242, 254, 0.05);
-  text-align: center; /* Text inside card is centered */
-  transition: transform 0.3s ease, border-color 0.3s ease;
-}
-
-.card:hover {
-  border-color: rgba(0, 242, 254, 0.5);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(0, 242, 254, 0.1);
+  padding: 32px;
+  margin-bottom: 24px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  box-sizing: border-box;
 }
 
 .card h3 {
   margin-top: 0;
-  color: #f8fafc;
-  font-size: 1.4rem;
-  margin-bottom: 20px;
+  color: #f4f4f5;
+  font-size: 1.25rem;
+  margin-bottom: 16px;
   font-weight: 600;
-  letter-spacing: 1px;
+  letter-spacing: -0.5px;
 }
 
-/* 📝 Input & Textarea */
+/* 📝 Inputs (Professional Left Align inside Center Card) */
 .input-box {
   width: 100%;
-  background: rgba(0, 0, 0, 0.3);
-  border: 1px solid rgba(0, 242, 254, 0.2);
-  color: #e2e8f0;
-  padding: 15px;
-  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #e4e4e7;
+  padding: 16px;
+  border-radius: 12px;
   font-family: inherit;
-  font-size: 1rem;
+  font-size: 0.95rem;
   resize: vertical;
   box-sizing: border-box;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
   text-align: left;
 }
 
 .input-box:focus {
   outline: none;
-  border-color: #00f2fe;
-  box-shadow: 0 0 15px rgba(0, 242, 254, 0.3);
-  background: rgba(0, 0, 0, 0.5);
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+  background: rgba(0, 0, 0, 0.4);
 }
 
 /* 📁 File Input */
 .file-input { 
   margin-bottom: 15px; 
-  color: #94a3b8; 
-  display: block; 
+  color: #a1a1aa; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%; 
-  text-align: center;
+  font-size: 0.9rem;
 }
 .file-input::file-selector-button {
-  background: linear-gradient(45deg, #1e293b, #334155);
-  color: #00f2fe;
-  border: 1px solid rgba(0, 242, 254, 0.3);
-  padding: 10px 20px;
+  background: #27272a;
+  color: #f4f4f5;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 8px 16px;
   border-radius: 8px;
   cursor: pointer;
   margin-right: 15px;
-  font-weight: 600;
-  transition: all 0.3s ease;
+  font-weight: 500;
+  transition: all 0.2s ease;
 }
 .file-input::file-selector-button:hover {
-  background: rgba(0, 242, 254, 0.1);
-  box-shadow: 0 0 10px rgba(0, 242, 254, 0.3);
+  background: #3f3f46;
 }
 
-/* 🎛️ Action Buttons Container */
+/* 🎛️ Action Buttons (Premium Grid) */
 .button-group {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
-  margin-top: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
   width: 100%;
-  max-width: 750px;
+  margin-top: 10px;
+}
+
+@media (max-width: 600px) {
+  .button-group { grid-template-columns: 1fr; }
 }
 
 .action-btn {
-  padding: 15px 25px;
+  padding: 16px 20px;
   border: none;
-  border-radius: 50px; /* Pill shape like mockup */
-  font-size: 1.05rem;
+  border-radius: 12px;
+  font-size: 1rem;
   font-weight: 600;
   color: white;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s ease;
-  flex: 1 1 calc(50% - 20px); /* 2x2 Grid setup */
-  min-width: 200px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+  transition: all 0.2s ease;
 }
 
-.action-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.action-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none !important; }
 
-/* Glowing Neon Buttons */
-.btn-analyze { 
-  background: linear-gradient(45deg, #0072ff, #00c6ff); 
-  box-shadow: 0 0 15px rgba(0, 198, 255, 0.4); 
-}
-.btn-analyze:hover:not(:disabled) { box-shadow: 0 0 25px rgba(0, 198, 255, 0.7); transform: translateY(-2px); }
+/* Solid Premium Colors (No excessive neon) */
+.btn-analyze { background: #2563eb; }
+.btn-analyze:hover:not(:disabled) { background: #1d4ed8; transform: translateY(-2px); box-shadow: 0 6px 15px rgba(37, 99, 235, 0.3); }
 
-.btn-interview { 
-  background: linear-gradient(45deg, #11998e, #38ef7d); 
-  box-shadow: 0 0 15px rgba(56, 239, 125, 0.4); 
-}
-.btn-interview:hover:not(:disabled) { box-shadow: 0 0 25px rgba(56, 239, 125, 0.7); transform: translateY(-2px); }
+.btn-interview { background: #059669; }
+.btn-interview:hover:not(:disabled) { background: #047857; transform: translateY(-2px); box-shadow: 0 6px 15px rgba(5, 150, 105, 0.3); }
 
-.btn-build { 
-  background: linear-gradient(45deg, #667eea, #764ba2); 
-  box-shadow: 0 0 15px rgba(118, 75, 162, 0.4); 
-}
-.btn-build:hover:not(:disabled) { box-shadow: 0 0 25px rgba(118, 75, 162, 0.7); transform: translateY(-2px); }
+.btn-build { background: #7c3aed; }
+.btn-build:hover:not(:disabled) { background: #6d28d9; transform: translateY(-2px); box-shadow: 0 6px 15px rgba(124, 58, 237, 0.3); }
 
-.btn-portals { 
-  background: linear-gradient(45deg, #f53844, #42378f); 
-  box-shadow: 0 0 15px rgba(245, 56, 68, 0.4); 
-}
-.btn-portals:hover:not(:disabled) { box-shadow: 0 0 25px rgba(245, 56, 68, 0.7); transform: translateY(-2px); }
+.btn-portals { background: #ea580c; }
+.btn-portals:hover:not(:disabled) { background: #c2410c; transform: translateY(-2px); box-shadow: 0 6px 15px rgba(234, 88, 12, 0.3); }
 
 /* 🌀 Spinner */
 .spinner {
   border: 2px solid rgba(255, 255, 255, 0.3);
   border-radius: 50%;
   border-top: 2px solid #ffffff;
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
   animation: spin 1s linear infinite;
   margin-right: 10px;
 }
 @keyframes spin { 100% { transform: rotate(360deg); } }
 
-/* 📦 Result Boxes (Slightly transparent to match theme) */
+/* 📦 Result Boxes (Clean & Professional) */
 .result-box {
   margin-top: 30px;
-  padding: 25px;
-  border-radius: 12px;
+  padding: 30px;
+  border-radius: 16px;
   white-space: pre-wrap;
-  line-height: 1.6;
-  font-size: 1rem;
-  background: rgba(15, 23, 42, 0.6);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  line-height: 1.7;
+  font-size: 0.95rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   text-align: left;
   width: 100%;
-  max-width: 750px;
-  animation: slideUp 0.5s ease forwards;
+  box-sizing: border-box;
+  animation: fadeIn 0.4s ease forwards;
 }
 
-@keyframes slideUp { 
-  from { opacity: 0; transform: translateY(20px); } 
+@keyframes fadeIn { 
+  from { opacity: 0; transform: translateY(10px); } 
   to { opacity: 1; transform: translateY(0); } 
 }
