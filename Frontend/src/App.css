@@ -50,6 +50,14 @@ body {
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
+.card h3 {
+  margin-top: 0;
+  color: #f8fafc;
+  font-size: 1.1rem;
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
 .card:hover { border-color: rgba(0, 198, 255, 0.3); }
 
 .card h3 { margin-top: 0; color: #f8fafc; font-size: 1.3rem; margin-bottom: 15px; }
