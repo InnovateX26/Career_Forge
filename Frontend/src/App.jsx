@@ -67,6 +67,9 @@ function App() {
     html2pdf().set(opt).from(tempContainer).save();
   };
 
+  const startListening = () => {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
   const downloadPDF = () => {
     window.print();
   };
