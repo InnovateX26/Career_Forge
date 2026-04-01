@@ -191,8 +191,11 @@ const speakText = (text) => {
 
       {questions && (
         <div className="result-box result-questions">
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '15px', flexWrap: 'wrap', gap: '10px' }}>
+          
+        </div>
 
-        
+
 
       {questions && (
         <div className="result-box result-questions">
