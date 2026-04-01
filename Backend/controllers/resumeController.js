@@ -105,6 +105,10 @@ ${finalResumeText}`
 
         });
 
+    const generateInterviewQuestions = async (req, res) => {
+    try {
+
+
         const text = response.text;
 
         res.status(200).json({
