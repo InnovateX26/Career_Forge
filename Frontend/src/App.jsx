@@ -80,6 +80,15 @@ function App() {
     recognition.interimResults = false;
     recognition.lang = 'en-IN';
 
+    recognition.onstart = () => setIsListening(true);
+
+    recognition.onresult = (event) => {
+      const transcript = event.results[0][0].transcript;
+      setJd((prevJd) => prevJd ? prevJd + " " + transcript : transcript);
+    };
+
+
+
   const downloadPDF = () => {
     window.print();
   };
