@@ -5,8 +5,9 @@ const ai = new GoogleGenAI({
     apiKey: process.env.GEMINI_API_KEY
 });
 
-// Roadmap Generation based on job description
-
+// ---------------------------------------------------------
+// FUNCTION 1: Roadmap Generation based on job description
+// ---------------------------------------------------------
 const generateResumeAndRoadmap = async (req, res) => {
     try {
         const { jobDescription } = req.body;
@@ -37,25 +38,23 @@ ${jobDescription}`
 
     } catch (error) {
         console.error("AI ERROR:", error);
-
         res.status(500).json({
             error: error.message || "Something went wrong"
         });
     }
 };
 
-// Analyze Resume Match with job description
-
+// ---------------------------------------------------------
+// FUNCTION 2: Analyze Resume Match with job description
+// ---------------------------------------------------------
 const analyzeResumeMatch = async (req, res) => {
     try {
         // Frontend se JD aur User ka Resume (file ya text) aayega
         const { jobDescription, resumeText } = req.body;
         let finalResumeText = resumeText; 
 
-       
         if (req.file) {
             try {
-               
                 const pdfData = await pdfParse(req.file.buffer);
                 finalResumeText = pdfData.text; 
             } catch (pdfError) {
@@ -70,7 +69,7 @@ const analyzeResumeMatch = async (req, res) => {
             });
         }
 
-        //  Gemini 3 Flash (latest)
+        // Gemini 3 Flash (latest)
         const response = await ai.models.generateContent({
             model: "gemini-3-flash-preview",
             contents: `Act as an expert ATS (Applicant Tracking System) and Career Coach.
@@ -92,6 +91,7 @@ Provide the analysis strictly in this format:
 - **Week 1-2:** [What to learn based on missing skills]
 - **Week 3-4:** [Advanced skills or practice]
 - **Projects to Build:** [Suggest 1-2 projects to cover weaknesses]
+
 **5. Custom Cover Letter ✉️:**
 [Write a professional, highly engaging 3-paragraph Cover Letter for the user to apply for this exact job. Highlight their strengths from the resume that match the job description.]
 
@@ -102,17 +102,34 @@ ${jobDescription}
 ---
 Resume:
 ${finalResumeText}` 
-
         });
 
-    const generateInterviewQuestions = async (req, res) => {
+        const text = response.text;
+
+        res.status(200).json({
+            success: true,
+            data: text
+        });
+
+    } catch (error) {
+        console.error("ATS MATCH ERROR:", error);
+        res.status(500).json({
+            error: error.message || "Failed to analyze resume"
+        });
+    }
+};
+
+// ---------------------------------------------------------
+// FUNCTION 3: Generate Interview Questions (NAYA FUNCTION)
+// ---------------------------------------------------------
+const generateInterviewQuestions = async (req, res) => {
     try {
         const { jobDescription } = req.body;
         if (!jobDescription) {
             return res.status(400).json({ error: "Job Description is required" });
         }
         const response = await ai.models.generateContent({
-            model: "gemini-2.5-flash", // Stable model use kar rahe hain taaki 503 error na aaye
+            model: "gemini-2.5-flash", 
             contents: `Act as an expert Technical Interviewer. 
 Based on the following Job Description, generate a list of highly probable interview questions for a fresher.
 
@@ -132,7 +149,8 @@ Format strictly as:
 Job Description:
 ${jobDescription}`
         });
-    res.status(200).json({
+
+        res.status(200).json({
             success: true,
             data: response.text
         });
@@ -144,20 +162,4 @@ ${jobDescription}`
 };
 
 
-        const text = response.text;
-
-        res.status(200).json({
-            success: true,
-            data: text
-        });
-
-    } catch (error) {
-        console.error("ATS MATCH ERROR:", error);
-
-        res.status(500).json({
-            error: error.message || "Failed to analyze resume"
-        });
-    }
-};
-
-module.exports = { generateResumeAndRoadmap, analyzeResumeMatch };
+module.exports = { generateResumeAndRoadmap, analyzeResumeMatch, generateInterviewQuestions };
