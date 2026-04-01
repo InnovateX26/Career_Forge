@@ -117,6 +117,11 @@ function App() {
         <button onClick={handleAnalyze} disabled={loading} style={{ padding: "12px 24px", fontSize: "16px", cursor: "pointer", backgroundColor: "#3498db", color: "white", border: "none", borderRadius: "5px" }}>
           {loading ? "Analyzing Match..." : "Analyze Resume & Generate Roadmap"}
         </button>
+
+        <button onClick={handleGenerateQuestions} disabled={loadingQ} style={{ padding: "12px 24px", fontSize: "16px", cursor: "pointer", backgroundColor: "#27ae60", color: "white", border: "none", borderRadius: "5px" }}>
+          {loadingQ ? "Generating Questions..." : "Get Interview Questions 🎯"}
+        </button>
+      </div>
       
       {/* 3. Analyze Button */}
       
