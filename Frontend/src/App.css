@@ -65,3 +65,5 @@ body {
 
 .input-box:focus { border-color: #00c6ff; box-shadow: 0 0 15px rgba(0, 198, 255, 0.3); }
 .file-input { margin-bottom: 15px; color: #94a3b8; }
+
+.button-group { display: flex; gap: 20px; justify-content: center; margin-top: 35px; flex-wrap: wrap; }
