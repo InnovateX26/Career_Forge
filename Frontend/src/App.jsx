@@ -64,6 +64,9 @@ function App() {
       jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
     };
 
+    html2pdf().set(opt).from(tempContainer).save();
+  };
+
   const downloadPDF = () => {
     window.print();
   };
