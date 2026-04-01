@@ -65,7 +65,7 @@ body {
 
 .input-box:focus { border-color: #00c6ff; box-shadow: 0 0 15px rgba(0, 198, 255, 0.3); }
 
-/* ✅ UPDATED: File Input & Choose File Button */
+/* ✅ File Input & Choose File Button */
 .file-input { margin-bottom: 15px; color: #94a3b8; }
 .file-input::file-selector-button {
   background: #334155;
@@ -94,6 +94,37 @@ body {
   align-items: center;
   transition: all 0.3s ease;
 }
+
 .action-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+/* 🔵 Analyze Button */
 .btn-analyze { background: linear-gradient(135deg, #0072ff, #00c6ff); box-shadow: 0 5px 20px rgba(0, 114, 255, 0.4); }
-.btn-analyze:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0, 114, 255, 0.6);
+.btn-analyze:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0, 114, 255, 0.6); }
+
+/* 🟢 Interview Button */
+.btn-interview { background: linear-gradient(135deg, #11998e, #38ef7d); box-shadow: 0 5px 20px rgba(56, 239, 125, 0.4); }
+.btn-interview:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(56, 239, 125, 0.6); }
+
+/* 🟠 Resume Build Button */
+.btn-build { background: linear-gradient(135deg, #8a2387, #e94057, #f27121); box-shadow: 0 5px 20px rgba(233, 64, 87, 0.4); }
+.btn-build:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(233, 64, 87, 0.6); }
+
+/* 🌀 Spinner Animation */
+.spinner {
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top: 3px solid #ffffff;
+  width: 18px;
+  height: 18px;
+  animation: spin 1s linear infinite;
+  margin-right: 10px;
+}
+@keyframes spin { 100% { transform: rotate(360deg); } }
+
+/* 📦 Result Boxes */
+.result-box { margin-top: 30px; padding: 25px; border-radius: 12px; white-space: pre-wrap; line-height: 1.6; animation: fadeIn 0.5s ease; }
+.result-roadmap { background: rgba(15, 23, 42, 0.7); border-left: 5px solid #00c6ff; }
+.result-questions { background: rgba(6, 78, 59, 0.4); border-left: 5px solid #38ef7d; }
+.result-build { background: rgba(88, 28, 135, 0.4); border-left: 5px solid #e94057; }
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
