@@ -97,17 +97,26 @@ function App() {
     recognition.start();
   };
 
+// ✅ Text to Speech (AI HR)
+
   const speakText = (text) => {
     if ('speechSynthesis' in window) {
       window.speechSynthesis.cancel(); 
-      const cleanText = text.replace(/[*#_]/g, '');
+      const cleanText = text.replace(/[*#_]/g, ''); 
+      
+      const utterance = new SpeechSynthesisUtterance(cleanText);
+      utterance.rate = 0.95; 
+      utterance.pitch = 1;
+      
+      utterance.onstart = () => setIsSpeaking(true);
+      utterance.onend = () => setIsSpeaking(false);
+      utterance.onerror = () => setIsSpeaking(false);
 
-
-
-  const downloadPDF = () => {
-    window.print();
+      window.speechSynthesis.speak(utterance);
+    } else {
+      alert("Oops! Your browser does not support the Voice feature.");
+    }
   };
-
   // ✅ NAYA FUNCTION: Voice to Text (Speak JD)
   const startListening = () => {
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
