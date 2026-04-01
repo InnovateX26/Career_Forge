@@ -195,6 +195,8 @@ const speakText = (text) => {
         <h3 style={{ color: '#34d399', margin: 0 }}>🎯 Custom Interview Questions:</h3>
         <button 
               onClick={() => isSpeaking ? stopSpeaking() : speakText(questions)}
+              style={{
+                background: isSpeaking ? '#ef4444' : '#10b981',
 
         </div>
 
