@@ -223,7 +223,7 @@ const findJobPortals = async (req, res) => {
         }
 
         const response = await ai.models.generateContent({
-            model: "gemini-1.5-flash", 
+            model: "gemini-3-flash-preview", 
             contents: `Act as an expert Career Counselor. Based on the following Job Description, provide a curated list of the best job portals, niche websites, and platforms where a candidate can find similar jobs.
 
             Format strictly as:
