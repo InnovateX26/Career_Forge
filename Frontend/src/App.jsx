@@ -41,3 +41,12 @@ function App() {
         jobDescription: jd,
         resumeText: resumeText
       });
+
+      setResult(response.data.data);
+    } catch (error) {
+      console.error("Error fetching data", error);
+      alert("Something went wrong!"); // Agar backend fat gaya ya band hai toh error dikhao.
+    }
+    
+    setLoading(false);
+  };
