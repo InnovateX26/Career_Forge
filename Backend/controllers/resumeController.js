@@ -248,6 +248,12 @@ ${jobDescription}`
             data: response.text
         });
 
+        } catch (error) {
+        console.error("PORTALS ERROR:", error);
+        res.status(500).json({ error: "Failed to find job portals" });
+    }
+};
+
 
 
 
