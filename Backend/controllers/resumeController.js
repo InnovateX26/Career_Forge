@@ -92,6 +92,8 @@ Provide the analysis strictly in this format:
 - **Week 1-2:** [What to learn based on missing skills]
 - **Week 3-4:** [Advanced skills or practice]
 - **Projects to Build:** [Suggest 1-2 projects to cover weaknesses]
+**5. Custom Cover Letter ✉️:**
+[Write a professional, highly engaging 3-paragraph Cover Letter for the user to apply for this exact job. Highlight their strengths from the resume that match the job description.]
 
 ---
 Job Description:
@@ -100,6 +102,7 @@ ${jobDescription}
 ---
 Resume:
 ${finalResumeText}` 
+
         });
 
         const text = response.text;
