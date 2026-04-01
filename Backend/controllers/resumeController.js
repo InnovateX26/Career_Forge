@@ -127,7 +127,7 @@ const generateInterviewQuestions = async (req, res) => {
             return res.status(400).json({ error: "Job Description is required" });
         }
         const response = await ai.models.generateContent({
-            model: "gemini-2.5-flash", 
+            model: "gemini-3-flash-preview", // ✅ Galti yahan thi, isko sahi kar diya hai
             contents: `Act as an expert Technical Interviewer. 
 Based on the following Job Description, generate a list of highly probable interview questions for a fresher.
 
@@ -170,7 +170,7 @@ const buildTailoredResume = async (req, res) => {
             return res.status(400).json({ error: "Job Description and Current Resume both are required to tailor it." });
         }
         const response = await ai.models.generateContent({
-            model: "gemini-2.5-flash", 
+            model: "gemini-3-flash-preview", 
             contents: `Act as an Expert ATS Resume Writer. 
 Take the user's Current Resume and rewrite it to perfectly match the provided Job Description. 
 Highlight the most relevant skills, optimize bullet points with action verbs, and structure it professionally.
