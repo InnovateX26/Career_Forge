@@ -67,3 +67,16 @@ body {
 .file-input { margin-bottom: 15px; color: #94a3b8; }
 
 .button-group { display: flex; gap: 20px; justify-content: center; margin-top: 35px; flex-wrap: wrap; }
+
+.action-btn {
+  padding: 15px 30px;
+  border: none;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: all 0.3s ease;
+}
