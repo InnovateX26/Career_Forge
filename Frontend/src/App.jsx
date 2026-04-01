@@ -1,5 +1,4 @@
 import { useState } from 'react';
-
 import axios from 'axios';
 import './App.css';
 
@@ -9,6 +8,10 @@ function App() {
   const [resumeText, setResumeText] = useState("");
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState("");
+
+  const [questions, setQuestions] = useState("");
+  const [loadingQ, setLoadingQ] = useState(false);
+  
   const handleFileUpload = (e) => {
     
     const file = e.target.files[0];
