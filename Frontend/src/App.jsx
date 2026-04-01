@@ -50,3 +50,67 @@ function App() {
     
     setLoading(false);
   };
+
+  return (
+    <div className="container">
+      <h1>CareerCraft AI</h1>
+      <p>Upload Resume & Paste Job Description to get ATS Match & Roadmap</p>
+      
+      {/* 1. Job Description Box */}
+      <div style={{ marginBottom: "20px" }}>
+        <h3>Job Description</h3>
+        <textarea 
+          rows="6" 
+          cols="50" 
+          placeholder="Paste Job Description here..."
+          value={jd} // Karan: Value state se aayegi (Controlled Component)
+          onChange={(e) => setJd(e.target.value)} // Karan: Jaise hi user type kare, state update ho jaye
+          style={{ width: "100%", padding: "10px" }}
+        />
+      </div>
+
+      {/* 2. Resume Upload Section */}
+      <div style={{ marginBottom: "20px", padding: "15px", border: "1px dashed #888", borderRadius: "8px" }}>
+        <h3>Your Resume</h3>
+        
+        {/* Karan: File input jo 'handleFileUpload' function ko call karega jab file select hogi */}
+        <input 
+          type="file" 
+          accept=".txt" 
+          onChange={handleFileUpload} 
+          style={{ marginBottom: "15px", display: "block" }}
+        />
+        
+        <p style={{ margin: "5px 0" }}>OR paste directly below:</p>
+        
+        {/* Karan: Agar file upload hui hai, toh ye box automatically FileReader ki wajah se bhar jayega */}
+        <textarea 
+          rows="6" 
+          cols="50" 
+          placeholder="Paste your Resume text here..."
+          value={resumeText}
+          onChange={(e) => setResumeText(e.target.value)}
+          style={{ width: "100%", padding: "10px" }}
+        />
+      </div>
+      
+      {/* 3. Analyze Button */}
+      {/* Karan: Jab 'loading' true ho, toh button disable ho jaye taaki user double-click na kar sake */}
+      <button onClick={handleAnalyze} disabled={loading} style={{ padding: "12px 24px", fontSize: "16px", cursor: "pointer" }}>
+        {loading ? "Analyzing Match & Generating Roadmap..." : "Analyze Resume & Generate Roadmap"}
+      </button>
+
+      {/* 4. AI Result Section */}
+      {/* Karan: Ye dibba tabhi dikhega jab 'result' state mein kuch text hoga (Conditional Rendering) */}
+      {result && (
+        // Karan: 'whiteSpace: pre-wrap' sabse zaroori CSS hai. Ye AI ki banayi hui new lines aur formatting ko UI par theek se dikhata hai.
+        <div style={{ whiteSpace: 'pre-wrap', textAlign: 'left', padding: '20px', marginTop: '30px', backgroundColor: '#1e1e1e', borderRadius: '8px', border: '1px solid #444' }}>
+          <h3>ATS Analysis & Career Roadmap:</h3>
+          <p>{result}</p> 
+        </div>
+      )}
+    </div>
+  );
+}
+
+export default App;
