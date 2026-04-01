@@ -254,8 +254,5 @@ ${jobDescription}`
     }
 };
 
-
-
-
 // ✅ FINAL EXPORT
-module.exports = { generateResumeAndRoadmap, analyzeResumeMatch, generateInterviewQuestions, buildTailoredResume };
+module.exports = { generateResumeAndRoadmap, analyzeResumeMatch, generateInterviewQuestions, buildTailoredResume, findJobPortals };
