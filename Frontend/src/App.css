@@ -151,6 +151,7 @@ body {
   animation: spin 1s linear infinite;
   margin-right: 8px;
 }
+@keyframes spin { 100% { transform: rotate(360deg); } }
 
 /* 🔵 1. Analyze Button */
 .btn-analyze { background: linear-gradient(135deg, #0072ff, #00c6ff); box-shadow: 0 5px 20px rgba(0, 114, 255, 0.4); }
