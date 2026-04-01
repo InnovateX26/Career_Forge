@@ -130,6 +130,14 @@ function App() {
           <p>{result}</p> 
         </div>
       )}
+
+      {questions && (
+        <div style={{ whiteSpace: 'pre-wrap', textAlign: 'left', padding: '20px', marginTop: '20px', backgroundColor: '#e8f6f3', borderRadius: '8px', border: '1px solid #1abc9c', color: "#2c3e50" }}>
+          <h3 style={{ color: "#16a085" }}>🎯 Custom Interview Questions:</h3>
+          <p>{questions}</p> 
+        </div>
+      )}
+    </div>
       
       {/* 3. Analyze Button */}
       
