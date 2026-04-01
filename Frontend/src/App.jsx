@@ -50,6 +50,7 @@ function App() {
       // PDF specific styling
 
       tempContainer.style.padding = '30px';
+      tempContainer.style.color = '#000000';
 
   const downloadPDF = () => {
     window.print();
