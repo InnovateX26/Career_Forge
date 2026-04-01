@@ -132,6 +132,16 @@ Format strictly as:
 Job Description:
 ${jobDescription}`
         });
+    res.status(200).json({
+            success: true,
+            data: response.text
+        });
+
+    } catch (error) {
+        console.error("INTERVIEW Q ERROR:", error);
+        res.status(500).json({ error: "Failed to generate questions" });
+    }
+};
 
 
         const text = response.text;
