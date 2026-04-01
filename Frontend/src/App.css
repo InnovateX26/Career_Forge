@@ -48,3 +48,17 @@ body {
 .card:hover { border-color: rgba(0, 198, 255, 0.3); }
 
 .card h3 { margin-top: 0; color: #f8fafc; font-size: 1.3rem; margin-bottom: 15px; }
+
+.input-box {
+  width: 100%;
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid #334155;
+  color: #f1f5f9;
+  padding: 15px;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  resize: vertical;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+}
