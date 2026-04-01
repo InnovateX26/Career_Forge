@@ -15,34 +15,35 @@ function App() {
   const [tailoredResume, setTailoredResume] = useState("");
   const [loadingR, setLoadingR] = useState(false);
 
-  
   const [portals, setPortals] = useState("");
   const [loadingP, setLoadingP] = useState(false);
 
-  //AI Voice track
+  // ✅ NAYA STATE: AI Voice track karne ke liye
+  const [isSpeaking, setIsSpeaking] = useState(false);
 
-const [isSpeaking, setIsSpeaking] = useState(false);
+  // ✅ NAYA FUNCTION: Text ko Aawaz mein badalne ke liye
+  const speakText = (text) => {
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.cancel(); // Pehle ki aawaz roko
+      
+      // Markdown symbols (* aur #) ko hata dete hain taaki AI unko na bole
+      const cleanText = text.replace(/[*#_]/g, ''); 
+      
+      const utterance = new SpeechSynthesisUtterance(cleanText);
+      utterance.rate = 0.95; // Thoda aaram se bolega interview style mein
+      utterance.pitch = 1;
+      
+      utterance.onstart = () => setIsSpeaking(true);
+      utterance.onend = () => setIsSpeaking(false);
+      utterance.onerror = () => setIsSpeaking(false);
 
-const speakText = (text) => {
-  if ('speechSynthesis' in window) {
-    window.speechSynthesis.cancel();
-
-    const cleanText = text.replace(/[*#_]/g, '');
-
-    const utterance = new SpeechSynthesisUtterance(cleanText);
-    utterance.rate = 0.95;
-    utterance.pitch = 1;
-
-    utterance.onstart = () => setIsSpeaking(true);
-    utterance.onend = () => setIsSpeaking(false);
-    utterance.onerror = () => setIsSpeaking(false);
-
-    window.speechSynthesis.speak(utterance);
+      window.speechSynthesis.speak(utterance);
     } else {
       alert("Oops! Tumhara browser Voice feature support nahi karta.");
     }
   };
 
+  // ✅ NAYA FUNCTION: Aawaz rokne ke liye
   const stopSpeaking = () => {
     if ('speechSynthesis' in window) {
       window.speechSynthesis.cancel();
@@ -83,7 +84,7 @@ const speakText = (text) => {
   const handleGenerateQuestions = async () => {
     if (!jd) return alert("Please enter the Job Description first!");
     
-    setLoadingQ(true); setQuestions(""); 
+    setLoadingQ(true); setQuestions(""); stopSpeaking(); 
     try {
       const response = await axios.post("http://localhost:5000/api/resume/questions", { jobDescription: jd });
       setQuestions(response.data.data);
@@ -94,7 +95,6 @@ const speakText = (text) => {
     setLoadingQ(false);
   };
 
-  // ✅ RESTORED: Auto-Build Resume Function 
   const handleBuildResume = async () => {
     if (!jd) return alert("Please enter the Job Description first!");
     if (!resumeText) return alert("Please upload or paste your Current Resume!");
@@ -110,7 +110,6 @@ const speakText = (text) => {
     setLoadingR(false);
   };
 
-  // ✅ FIXED: Job Portals Function
   const handleFindPortals = async () => {
     if (!jd) return alert("Please enter the Job Description first!");
     
@@ -127,10 +126,9 @@ const speakText = (text) => {
 
   return (
     <div className="container">
-      <h1 className="title">CareerCraft AI</h1>
+      <h1 className="title">CareerCraft <span className="ai-text">AI</span></h1>
       <p className="subtitle">Upload Resume & Paste Job Description to get ATS Match, Roadmap, Interview Prep & New Resume</p>
       
-      {/* Job Description Card */}
       <div className="card">
         <h3>Job Description</h3>
         <textarea 
@@ -142,7 +140,6 @@ const speakText = (text) => {
         />
       </div>
 
-      {/* Resume Upload Card */}
       <div className="card">
         <h3>Your Resume</h3>
         <input type="file" accept=".txt" onChange={handleFileUpload} className="file-input" />
@@ -156,7 +153,6 @@ const speakText = (text) => {
         />
       </div>
       
-      {/* Action Buttons */}
       <div className="button-group">
         <button onClick={handleAnalyze} disabled={loading} className="action-btn btn-analyze">
           {loading && <span className="spinner"></span>}
@@ -179,21 +175,19 @@ const speakText = (text) => {
         </button>
       </div>
 
-      {/* AI Results */}
       {result && (
         <div className="result-box result-roadmap">
-          <h3 style={{ color: '#00c6ff', marginTop: 0 }}>📊 ATS Analysis & Career Roadmap:</h3>
+          <h3 style={{ color: '#60a5fa', marginTop: 0 }}>📊 ATS Analysis & Career Roadmap:</h3>
           <p>{result}</p> 
         </div>
       )}
 
-      //add voice button
-
+      {/* ✅ VOICE BUTTON INCLUDED HERE */}
       {questions && (
         <div className="result-box result-questions">
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '15px', flexWrap: 'wrap', gap: '10px' }}>
-        <h3 style={{ color: '#34d399', margin: 0 }}>🎯 Custom Interview Questions:</h3>
-        <button 
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '15px', flexWrap: 'wrap', gap: '10px' }}>
+            <h3 style={{ color: '#34d399', margin: 0 }}>🎯 Custom Interview Questions:</h3>
+            <button 
               onClick={() => isSpeaking ? stopSpeaking() : speakText(questions)}
               style={{
                 background: isSpeaking ? '#ef4444' : '#10b981',
@@ -202,33 +196,24 @@ const speakText = (text) => {
                 boxShadow: '0 4px 6px rgba(0,0,0,0.2)', transition: '0.3s'
               }}
             >
-            {isSpeaking ? '⏹️ Stop AI HR' : '▶️ Listen to AI HR'}
+              {isSpeaking ? '⏹️ Stop AI HR' : '▶️ Listen to AI HR'}
             </button>
           </div>
           <p>{questions}</p> 
         </div>
       )}
 
-
-
-      {questions && (
-        <div className="result-box result-questions">
-          <h3 style={{ color: '#38ef7d', marginTop: 0 }}>🎯 Custom Interview Questions:</h3>
-          <p>{questions}</p> 
-        </div>
-      )}
-
+      {/* ✅ PERFECT TAILORED RESUME BLOCK */}
       {tailoredResume && (
         <div className="result-box result-build">
-          <h3 style={{ color: '#fca5a5', marginTop: 0 }}>📝 ATS-Optimized Tailored Resume:</h3>
+          <h3 style={{ color: '#a78bfa', marginTop: 0 }}>📝 ATS-Optimized Tailored Resume:</h3>
           <p>{tailoredResume}</p> 
         </div>
       )}
 
-      {/* ✅ FIXED: Ye block component ke bahar tha, ab andar aa gaya */}
       {portals && (
         <div className="result-box result-portals">
-          <h3 style={{ color: '#fcd34d', marginTop: 0 }}>🌍 Best Platforms to Apply:</h3>
+          <h3 style={{ color: '#fbbf24', marginTop: 0 }}>🌍 Best Platforms to Apply:</h3>
           <p>{portals}</p> 
         </div>
       )}
