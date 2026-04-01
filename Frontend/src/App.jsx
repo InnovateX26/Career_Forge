@@ -3,15 +3,19 @@ import axios from 'axios';
 import './App.css';
 
 function App() {
- 
+  // --- STATES ---
   const [jd, setJd] = useState("");
   const [resumeText, setResumeText] = useState("");
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState("");
-
+  
   const [questions, setQuestions] = useState("");
   const [loadingQ, setLoadingQ] = useState(false);
-  
+
+  // ✅ NAYA STATE: Auto Resume Builder ke liye
+  const [tailoredResume, setTailoredResume] = useState("");
+  const [loadingR, setLoadingR] = useState(false);
+
   const handleFileUpload = (e) => {
     const file = e.target.files[0];
     if (!file) return; 
@@ -22,124 +26,122 @@ function App() {
         setResumeText(event.target.result); 
       };
       reader.readAsText(file);
-
     } else {
-  
-      alert("Smart Tip: Abhi ke liye apna resume .txt format mein upload karein, ya box mein direct paste karein!");
+      alert("Smart Tip: Please upload your resume in .txt format, or paste it directly!");
     }
   };
 
   const handleAnalyze = async () => {
-    if (!jd) return alert("Please enter Job Description!");
+    if (!jd) return alert("Please enter the Job Description!");
     if (!resumeText) return alert("Please upload or paste your Resume!");
     
-    setLoading(true);
-    setResult(""); 
-    
+    setLoading(true); setResult(""); 
     try {
-      const response = await axios.post("http://localhost:5000/api/resume/analyze", {
-        jobDescription: jd,
-        resumeText: resumeText
-      });
-
+      const response = await axios.post("http://localhost:5000/api/resume/analyze", { jobDescription: jd, resumeText: resumeText });
       setResult(response.data.data);
-    } catch (error) {
-      console.error("Error fetching data", error);
-      alert("Something went wrong!"); 
-    }
-    
+    } catch (error) { alert("Something went wrong!"); } 
     setLoading(false);
   };
 
   const handleGenerateQuestions = async () => {
-    if (!jd) return alert("Please enter Job Description first!");
+    if (!jd) return alert("Please enter the Job Description first!");
     
-    setLoadingQ(true);
-    setQuestions("");
-
+    setLoadingQ(true); setQuestions(""); 
     try {
-      const response = await axios.post("http://localhost:5000/api/resume/questions", {
-        jobDescription: jd
-      });
+      const response = await axios.post("http://localhost:5000/api/resume/questions", { jobDescription: jd });
       setQuestions(response.data.data);
-    } catch (error) {
-      console.error("Error", error);
-      alert("Something went wrong!"); 
-    }
+    } catch (error) { alert("Something went wrong!"); }
     setLoadingQ(false);
+  };
+
+  // ✅ NAYA FUNCTION: Resume Auto-Tailor karne ke liye
+  const handleBuildResume = async () => {
+    if (!jd) return alert("Please enter the Job Description first!");
+    if (!resumeText) return alert("Please upload or paste your Current Resume!");
+    
+    setLoadingR(true); setTailoredResume(""); 
+    try {
+      const response = await axios.post("http://localhost:5000/api/resume/build", { jobDescription: jd, resumeText: resumeText });
+      setTailoredResume(response.data.data);
+    } catch (error) { alert("Something went wrong!"); }
+    setLoadingR(false);
   };
 
   return (
     <div className="container">
-      <h1>CareerCraft AI</h1>
-      <p>Upload Resume & Paste Job Description to get ATS Match & Roadmap</p>
+      <h1 className="title">CareerCraft AI</h1>
+      <p className="subtitle">Upload Resume & Paste Job Description to get ATS Match, Roadmap, Interview Prep & New Resume</p>
       
-      {/* 1. Job Description Box */}
-      <div style={{ marginBottom: "20px" }}>
+      {/* Job Description Card */}
+      <div className="card">
         <h3>Job Description</h3>
         <textarea 
-          rows="6" 
-          cols="50" 
-          placeholder="Paste Job Description here..."
+          className="input-box" 
+          rows="5" 
+          placeholder="Paste Job Description here..." 
           value={jd} 
           onChange={(e) => setJd(e.target.value)} 
-          style={{ width: "100%", padding: "10px" }}
         />
       </div>
 
-      {/* 2. Resume Upload Section */}
-      <div style={{ marginBottom: "20px", padding: "15px", border: "1px dashed #888", borderRadius: "8px" }}>
+      {/* Resume Upload Card */}
+      <div className="card">
         <h3>Your Resume</h3>
-        
-        
-        <input 
-          type="file" 
-          accept=".txt" 
-          onChange={handleFileUpload} 
-          style={{ marginBottom: "15px", display: "block" }}
-        />
-        
-        <p style={{ margin: "5px 0" }}>OR paste directly below:</p>
-        
-       
+        <input type="file" accept=".txt" onChange={handleFileUpload} className="file-input" />
+        <p style={{ color: '#94a3b8', margin: '10px 0', fontSize: '0.9rem' }}>OR paste directly below:</p>
         <textarea 
-          rows="6" 
-          cols="50" 
-          placeholder="Paste your Resume text here..."
-          value={resumeText}
-          onChange={(e) => setResumeText(e.target.value)}
-          style={{ width: "100%", padding: "10px" }}
+          className="input-box" 
+          rows="5" 
+          placeholder="Paste your Resume text here..." 
+          value={resumeText} 
+          onChange={(e) => setResumeText(e.target.value)} 
         />
       </div>
-
-      {/* 3. Action Buttons */}
-      <div style={{ display: 'flex', gap: '15px', justifyContent: 'center', flexWrap: 'wrap' }}>
-        <button onClick={handleAnalyze} disabled={loading} style={{ padding: "12px 24px", fontSize: "16px", cursor: "pointer", backgroundColor: "#3498db", color: "white", border: "none", borderRadius: "5px" }}>
-          {loading ? "Analyzing Match..." : "Analyze Resume & Generate Roadmap"}
+      
+      {/* Action Buttons (Ab 3 buttons hain) */}
+      <div className="button-group">
+        <button onClick={handleAnalyze} disabled={loading} className="action-btn btn-analyze">
+          {loading && <span className="spinner"></span>}
+          {loading ? "Analyzing..." : "Analyze & Roadmap 📊"}
         </button>
 
-        <button onClick={handleGenerateQuestions} disabled={loadingQ} style={{ padding: "12px 24px", fontSize: "16px", cursor: "pointer", backgroundColor: "#27ae60", color: "white", border: "none", borderRadius: "5px" }}>
-          {loadingQ ? "Generating Questions..." : "Get Interview Questions 🎯"}
+        <button onClick={handleGenerateQuestions} disabled={loadingQ} className="action-btn btn-interview">
+          {loadingQ && <span className="spinner"></span>}
+          {loadingQ ? "Generating..." : "Interview Qs 🎯"}
+        </button>
+
+        {/* ✅ NAYA BUTTON: Resume Build */}
+        <button onClick={handleBuildResume} disabled={loadingR} className="action-btn btn-build">
+          {loadingR && <span className="spinner"></span>}
+          {loadingR ? "Building..." : "Auto-Tailor Resume 📝"}
         </button>
       </div>
 
-      {/* 4. AI Result Section (Roadmap) */}
+      {/* AI Result: Roadmap */}
       {result && (
-        <div style={{ whiteSpace: 'pre-wrap', textAlign: 'left', padding: '20px', marginTop: '30px', backgroundColor: '#1e1e1e', borderRadius: '8px', border: '1px solid #444' }}>
-          <h3>ATS Analysis & Career Roadmap:</h3>
+        <div className="result-box result-roadmap">
+          <h3 style={{ color: '#00c6ff', marginTop: 0 }}>📊 ATS Analysis & Career Roadmap:</h3>
           <p>{result}</p> 
         </div>
       )}
 
+      {/* AI Result: Interview Questions */}
       {questions && (
-        <div style={{ whiteSpace: 'pre-wrap', textAlign: 'left', padding: '20px', marginTop: '20px', backgroundColor: '#e8f6f3', borderRadius: '8px', border: '1px solid #1abc9c', color: "#2c3e50" }}>
-          <h3 style={{ color: "#16a085" }}>🎯 Custom Interview Questions:</h3>
+        <div className="result-box result-questions">
+          <h3 style={{ color: '#38ef7d', marginTop: 0 }}>🎯 Custom Interview Questions:</h3>
           <p>{questions}</p> 
+        </div>
+      )}
+
+      {/* ✅ NAYA AI Result: Tailored Resume */}
+      {tailoredResume && (
+        <div className="result-box result-build">
+          <h3 style={{ color: '#fca5a5', marginTop: 0 }}>📝 ATS-Optimized Tailored Resume:</h3>
+          <p>{tailoredResume}</p> 
         </div>
       )}
     </div>
   );
 }
 
-export default App;      
-     
+export default App;
