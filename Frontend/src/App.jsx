@@ -45,8 +45,7 @@ function App() {
       setResult(response.data.data);
     } catch (error) {
       console.error("Error fetching data", error);
-      alert("Something went wrong!"); // Agar backend fat gaya ya band hai toh error dikhao.
-    }
+      alert("Something went wrong!"); 
     
     setLoading(false);
   };
@@ -63,8 +62,8 @@ function App() {
           rows="6" 
           cols="50" 
           placeholder="Paste Job Description here..."
-          value={jd} // Karan: Value state se aayegi (Controlled Component)
-          onChange={(e) => setJd(e.target.value)} // Karan: Jaise hi user type kare, state update ho jaye
+          value={jd} 
+          onChange={(e) => setJd(e.target.value)} 
           style={{ width: "100%", padding: "10px" }}
         />
       </div>
@@ -73,7 +72,7 @@ function App() {
       <div style={{ marginBottom: "20px", padding: "15px", border: "1px dashed #888", borderRadius: "8px" }}>
         <h3>Your Resume</h3>
         
-        {/* Karan: File input jo 'handleFileUpload' function ko call karega jab file select hogi */}
+        
         <input 
           type="file" 
           accept=".txt" 
@@ -83,7 +82,7 @@ function App() {
         
         <p style={{ margin: "5px 0" }}>OR paste directly below:</p>
         
-        {/* Karan: Agar file upload hui hai, toh ye box automatically FileReader ki wajah se bhar jayega */}
+       
         <textarea 
           rows="6" 
           cols="50" 
@@ -95,7 +94,7 @@ function App() {
       </div>
       
       {/* 3. Analyze Button */}
-      {/* Karan: Jab 'loading' true ho, toh button disable ho jaye taaki user double-click na kar sake */}
+      
       <button onClick={handleAnalyze} disabled={loading} style={{ padding: "12px 24px", fontSize: "16px", cursor: "pointer" }}>
         {loading ? "Analyzing Match & Generating Roadmap..." : "Analyze Resume & Generate Roadmap"}
       </button>
@@ -103,7 +102,7 @@ function App() {
       {/* 4. AI Result Section */}
       {/* Karan: Ye dibba tabhi dikhega jab 'result' state mein kuch text hoga (Conditional Rendering) */}
       {result && (
-        // Karan: 'whiteSpace: pre-wrap' sabse zaroori CSS hai. Ye AI ki banayi hui new lines aur formatting ko UI par theek se dikhata hai.
+        
         <div style={{ whiteSpace: 'pre-wrap', textAlign: 'left', padding: '20px', marginTop: '30px', backgroundColor: '#1e1e1e', borderRadius: '8px', border: '1px solid #444' }}>
           <h3>ATS Analysis & Career Roadmap:</h3>
           <p>{result}</p> 
