@@ -107,6 +107,10 @@ ${finalResumeText}`
 
     const generateInterviewQuestions = async (req, res) => {
     try {
+        const { jobDescription } = req.body;
+        if (!jobDescription) {
+            return res.status(400).json({ error: "Job Description is required" });
+        }
 
 
         const text = response.text;
