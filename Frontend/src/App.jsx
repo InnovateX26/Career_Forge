@@ -131,3 +131,7 @@ function App() {
       alert("Please upload your resume in .txt format, or paste it directly.");
     }
   };
+
+  const handleAnalyze = async () => {
+    if (!jd) return alert("Please enter the Job Description.");
+    if (!resumeText) return alert("Please upload or paste your Resume.");
