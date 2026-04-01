@@ -222,5 +222,9 @@ const findJobPortals = async (req, res) => {
             return res.status(400).json({ error: "Job Description is required to find portals." });
         }
 
+        const response = await ai.models.generateContent({
+            model: "gemini-1.5-flash", 
+            contents: `Act as an expert Career Counselor. Based on the following Job Description, provide a curated list of the best job portals, niche websites, and platforms where a candidate can find similar jobs.
+
 // ✅ FINAL EXPORT
 module.exports = { generateResumeAndRoadmap, analyzeResumeMatch, generateInterviewQuestions, buildTailoredResume };
