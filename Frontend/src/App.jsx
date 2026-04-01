@@ -25,6 +25,7 @@ const [isSpeaking, setIsSpeaking] = useState(false);
 
 const speakText = (text) => {
   if ('speechSynthesis' in window) {
+    window.speechSynthesis.cancel();
 
   const handleFileUpload = (e) => {
     const file = e.target.files[0];
