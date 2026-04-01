@@ -24,6 +24,7 @@ function App() {
 const [isSpeaking, setIsSpeaking] = useState(false);
 
 const speakText = (text) => {
+  if ('speechSynthesis' in window) {
 
   const handleFileUpload = (e) => {
     const file = e.target.files[0];
