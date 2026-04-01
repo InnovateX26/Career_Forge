@@ -18,19 +18,35 @@ function App() {
   const [portals, setPortals] = useState("");
   const [loadingP, setLoadingP] = useState(false);
 
-  // ✅ NAYA STATE: AI Voice track karne ke liye
   const [isSpeaking, setIsSpeaking] = useState(false);
+  const [copied, setCopied] = useState(false);
 
-  // ✅ NAYA FUNCTION: Text ko Aawaz mein badalne ke liye
+  // ✅ SMART FORMATTER: AI ke "**text**" ko asli Bold mein convert karta hai
+  const renderText = (text) => {
+    if (!text) return null;
+    const formattedText = text
+      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') // Bold text conversion
+      .replace(/\n/g, '<br/>'); // Line break preservation
+    return <div dangerouslySetInnerHTML={{ __html: formattedText }} style={{ lineHeight: '1.6' }} />;
+  };
+
+  const copyToClipboard = (text) => {
+    navigator.clipboard.writeText(text);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  const downloadPDF = () => {
+    window.print();
+  };
+
   const speakText = (text) => {
     if ('speechSynthesis' in window) {
-      window.speechSynthesis.cancel(); // Pehle ki aawaz roko
-      
-      // Markdown symbols (* aur #) ko hata dete hain taaki AI unko na bole
+      window.speechSynthesis.cancel(); 
       const cleanText = text.replace(/[*#_]/g, ''); 
       
       const utterance = new SpeechSynthesisUtterance(cleanText);
-      utterance.rate = 0.95; // Thoda aaram se bolega interview style mein
+      utterance.rate = 0.95; 
       utterance.pitch = 1;
       
       utterance.onstart = () => setIsSpeaking(true);
@@ -39,11 +55,10 @@ function App() {
 
       window.speechSynthesis.speak(utterance);
     } else {
-      alert("Oops! Tumhara browser Voice feature support nahi karta.");
+      alert("Oops! Your browser does not support the Voice feature.");
     }
   };
 
-  // ✅ NAYA FUNCTION: Aawaz rokne ke liye
   const stopSpeaking = () => {
     if ('speechSynthesis' in window) {
       window.speechSynthesis.cancel();
@@ -62,13 +77,13 @@ function App() {
       };
       reader.readAsText(file);
     } else {
-      alert("Smart Tip: Please upload your resume in .txt format, or paste it directly!");
+      alert("Please upload your resume in .txt format, or paste it directly.");
     }
   };
 
   const handleAnalyze = async () => {
-    if (!jd) return alert("Please enter the Job Description!");
-    if (!resumeText) return alert("Please upload or paste your Resume!");
+    if (!jd) return alert("Please enter the Job Description.");
+    if (!resumeText) return alert("Please upload or paste your Resume.");
     
     setLoading(true); setResult(""); 
     try {
@@ -76,13 +91,13 @@ function App() {
       setResult(response.data.data);
     } catch (error) { 
       console.error("API Error:", error.response?.data || error.message);
-      alert("Backend Error: " + (error.response?.data?.error || "Something went wrong!")); 
+      alert("Backend Error: " + (error.response?.data?.error || "Something went wrong.")); 
     } 
     setLoading(false);
   };
 
   const handleGenerateQuestions = async () => {
-    if (!jd) return alert("Please enter the Job Description first!");
+    if (!jd) return alert("Please enter the Job Description first.");
     
     setLoadingQ(true); setQuestions(""); stopSpeaking(); 
     try {
@@ -90,14 +105,14 @@ function App() {
       setQuestions(response.data.data);
     } catch (error) { 
       console.error("API Error:", error.response?.data || error.message);
-      alert("Backend Error: " + (error.response?.data?.error || "Something went wrong!")); 
+      alert("Backend Error: " + (error.response?.data?.error || "Something went wrong.")); 
     }
     setLoadingQ(false);
   };
 
   const handleBuildResume = async () => {
-    if (!jd) return alert("Please enter the Job Description first!");
-    if (!resumeText) return alert("Please upload or paste your Current Resume!");
+    if (!jd) return alert("Please enter the Job Description first.");
+    if (!resumeText) return alert("Please upload or paste your Current Resume.");
     
     setLoadingR(true); setTailoredResume(""); 
     try {
@@ -105,13 +120,13 @@ function App() {
       setTailoredResume(response.data.data);
     } catch (error) { 
       console.error("API Error:", error.response?.data || error.message);
-      alert("Backend Error: " + (error.response?.data?.error || "Check backend terminal, server might be down!")); 
+      alert("Backend Error: " + (error.response?.data?.error || "Check backend terminal, server might be down.")); 
     }
     setLoadingR(false);
   };
 
   const handleFindPortals = async () => {
-    if (!jd) return alert("Please enter the Job Description first!");
+    if (!jd) return alert("Please enter the Job Description first.");
     
     setLoadingP(true); setPortals(""); 
     try {
@@ -119,7 +134,7 @@ function App() {
       setPortals(response.data.data);
     } catch (error) { 
       console.error("API Error:", error.response?.data || error.message);
-      alert("Backend Error: " + (error.response?.data?.error || "Check backend terminal!")); 
+      alert("Backend Error: " + (error.response?.data?.error || "Check backend terminal.")); 
     }
     setLoadingP(false);
   };
@@ -156,37 +171,36 @@ function App() {
       <div className="button-group">
         <button onClick={handleAnalyze} disabled={loading} className="action-btn btn-analyze">
           {loading && <span className="spinner"></span>}
-          {loading ? "Analyzing..." : "Analyze & Roadmap 📊"}
+          {loading ? "Analyzing..." : "Analyze & Roadmap"}
         </button>
 
         <button onClick={handleGenerateQuestions} disabled={loadingQ} className="action-btn btn-interview">
           {loadingQ && <span className="spinner"></span>}
-          {loadingQ ? "Generating..." : "Interview Qs 🎯"}
+          {loadingQ ? "Generating..." : "Interview Questions"}
         </button>
 
         <button onClick={handleBuildResume} disabled={loadingR} className="action-btn btn-build">
           {loadingR && <span className="spinner"></span>}
-          {loadingR ? "Building..." : "Auto-Tailor Resume 📝"}
+          {loadingR ? "Building..." : "Auto-Tailor Resume"}
         </button>
 
         <button onClick={handleFindPortals} disabled={loadingP} className="action-btn btn-portals">
           {loadingP && <span className="spinner"></span>}
-          {loadingP ? "Searching..." : "Find Job Portals 🌍"}
+          {loadingP ? "Searching..." : "Find Job Portals"}
         </button>
       </div>
 
       {result && (
         <div className="result-box result-roadmap">
-          <h3 style={{ color: '#60a5fa', marginTop: 0 }}>📊 ATS Analysis & Career Roadmap:</h3>
-          <p>{result}</p> 
+          <h3 style={{ color: '#60a5fa', marginTop: 0 }}>ATS Analysis & Career Roadmap</h3>
+          {renderText(result)}
         </div>
       )}
 
-      {/* ✅ VOICE BUTTON INCLUDED HERE */}
       {questions && (
         <div className="result-box result-questions">
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '15px', flexWrap: 'wrap', gap: '10px' }}>
-            <h3 style={{ color: '#34d399', margin: 0 }}>🎯 Custom Interview Questions:</h3>
+            <h3 style={{ color: '#34d399', margin: 0 }}>Custom Interview Questions</h3>
             <button 
               onClick={() => isSpeaking ? stopSpeaking() : speakText(questions)}
               style={{
@@ -196,25 +210,49 @@ function App() {
                 boxShadow: '0 4px 6px rgba(0,0,0,0.2)', transition: '0.3s'
               }}
             >
-              {isSpeaking ? '⏹️ Stop AI HR' : '▶️ Listen to AI HR'}
+              {isSpeaking ? 'Stop AI HR' : 'Listen to AI HR'}
             </button>
           </div>
-          <p>{questions}</p> 
+          {renderText(questions)}
         </div>
       )}
 
-      {/* ✅ PERFECT TAILORED RESUME BLOCK */}
       {tailoredResume && (
         <div className="result-box result-build">
-          <h3 style={{ color: '#a78bfa', marginTop: 0 }}>📝 ATS-Optimized Tailored Resume:</h3>
-          <p>{tailoredResume}</p> 
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '15px', flexWrap: 'wrap', gap: '10px' }}>
+            <h3 style={{ color: '#a78bfa', margin: 0 }}>ATS-Optimized Tailored Resume</h3>
+            
+            <div style={{ display: 'flex', gap: '10px' }}>
+              <button 
+                onClick={() => copyToClipboard(tailoredResume)}
+                style={{
+                  background: copied ? '#10b981' : '#334155', color: 'white', border: 'none', 
+                  padding: '6px 12px', borderRadius: '6px', cursor: 'pointer', fontSize: '0.9rem', transition: '0.3s'
+                }}
+              >
+                {copied ? 'Copied!' : 'Copy Text'}
+              </button>
+
+              <button 
+                onClick={downloadPDF}
+                style={{
+                  background: '#a78bfa', color: 'white', border: 'none', 
+                  padding: '6px 12px', borderRadius: '6px', cursor: 'pointer', fontSize: '0.9rem',
+                  fontWeight: 'bold', transition: '0.3s', boxShadow: '0 2px 4px rgba(0,0,0,0.2)'
+                }}
+              >
+                Save as PDF
+              </button>
+            </div>
+          </div>
+          {renderText(tailoredResume)}
         </div>
       )}
 
       {portals && (
         <div className="result-box result-portals">
-          <h3 style={{ color: '#fbbf24', marginTop: 0 }}>🌍 Best Platforms to Apply:</h3>
-          <p>{portals}</p> 
+          <h3 style={{ color: '#fbbf24', marginTop: 0 }}>Best Platforms to Apply</h3>
+          {renderText(portals)}
         </div>
       )}
     </div>

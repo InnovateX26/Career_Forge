@@ -14,13 +14,13 @@ const generateResumeAndRoadmap = async (req, res) => {
 
         if (!jobDescription) {
             return res.status(400).json({
-                error: "Job Description is required"
+                error: "Job Description is required."
             });
         }
         const response = await ai.models.generateContent({
             model: "gemini-3-flash-preview",
             contents: `Act as an expert Career Coach.
-            Create a roadmap with:
+Create a roadmap with:
 1. Skills
 2. Weekly plan
 3. Projects
@@ -39,7 +39,7 @@ ${jobDescription}`
     } catch (error) {
         console.error("AI ERROR:", error);
         res.status(500).json({
-            error: error.message || "Something went wrong"
+            error: error.message || "Failed to generate roadmap."
         });
     }
 };
@@ -58,13 +58,13 @@ const analyzeResumeMatch = async (req, res) => {
                 finalResumeText = pdfData.text; 
             } catch (pdfError) {
                 console.error("PDF Parsing Error:", pdfError);
-                return res.status(400).json({ error: "Upload a valid PDF File." });
+                return res.status(400).json({ error: "Please upload a valid PDF Document." });
             }
         }
         
         if (!jobDescription || !finalResumeText) {
             return res.status(400).json({
-                error: "Job Description aur Resume (File ya Text) dono zaroori hain"
+                error: "Both Job Description and Resume (File or Text) are required."
             });
         }
 
@@ -90,7 +90,7 @@ Provide the analysis strictly in this format:
 - **Week 3-4:** [Advanced skills or practice]
 - **Projects to Build:** [Suggest 1-2 projects to cover weaknesses]
 
-**5. Custom Cover Letter ✉️:**
+**5. Custom Cover Letter:**
 [Write a professional, highly engaging 3-paragraph Cover Letter for the user to apply for this exact job. Highlight their strengths from the resume that match the job description.]
 
 ---
@@ -112,7 +112,7 @@ ${finalResumeText}`
     } catch (error) {
         console.error("ATS MATCH ERROR:", error);
         res.status(500).json({
-            error: error.message || "Failed to analyze resume"
+            error: error.message || "Failed to analyze resume."
         });
     }
 };
@@ -124,24 +124,25 @@ const generateInterviewQuestions = async (req, res) => {
     try {
         const { jobDescription } = req.body;
         if (!jobDescription) {
-            return res.status(400).json({ error: "Job Description is required" });
+            return res.status(400).json({ error: "Job Description is required." });
         }
         const response = await ai.models.generateContent({
-            model: "gemini-3-flash-preview", // ✅ Galti yahan thi, isko sahi kar diya hai
+            model: "gemini-3-flash-preview",
             contents: `Act as an expert Technical Interviewer. 
 Based on the following Job Description, generate a list of highly probable interview questions for a fresher.
 
 Format strictly as:
-**🔥 Technical Questions:**
+
+**Technical Questions:**
 1. [Question]
 2. [Question]
 3. [Question]
 
-**🤝 HR / Behavioral Questions:**
+**HR / Behavioral Questions:**
 1. [Question]
 2. [Question]
 
-**💡 Pro-Tip to crack this interview:** [1 short tip]
+**Pro-Tip to crack this interview:** [1 short tip]
 
 ---
 Job Description:
@@ -155,7 +156,7 @@ ${jobDescription}`
 
     } catch (error) {
         console.error("INTERVIEW Q ERROR:", error);
-        res.status(500).json({ error: "Failed to generate questions" });
+        res.status(500).json({ error: "Failed to generate interview questions." });
     }
 };
 
@@ -167,7 +168,7 @@ const buildTailoredResume = async (req, res) => {
         const { jobDescription, resumeText } = req.body;
 
         if (!jobDescription || !resumeText) {
-            return res.status(400).json({ error: "Job Description and Current Resume both are required to tailor it." });
+            return res.status(400).json({ error: "Both Job Description and Current Resume are required to tailor it." });
         }
         const response = await ai.models.generateContent({
             model: "gemini-3-flash-preview", 
@@ -176,6 +177,7 @@ Take the user's Current Resume and rewrite it to perfectly match the provided Jo
 Highlight the most relevant skills, optimize bullet points with action verbs, and structure it professionally.
 
 Format strictly as a Professional Resume:
+
 **[Full Name / Placeholder]**
 **Contact Info:** [Placeholder]
 
@@ -207,12 +209,12 @@ ${resumeText}`
 
     } catch (error) {
         console.error("BUILD RESUME ERROR:", error);
-        res.status(500).json({ error: "Failed to build resume" });
+        res.status(500).json({ error: "Failed to build tailored resume." });
     }
 };
 
 // ---------------------------------------------------------
-// FUNCTION 5: Find Relevant Job Portals (NAYA FEATURE)
+// FUNCTION 5: Find Relevant Job Portals
 // ---------------------------------------------------------
 const findJobPortals = async (req, res) => {
     try {
@@ -226,17 +228,18 @@ const findJobPortals = async (req, res) => {
             model: "gemini-3-flash-preview", 
             contents: `Act as an expert Career Counselor. Based on the following Job Description, provide a curated list of the best job portals, niche websites, and platforms where a candidate can find similar jobs.
 
-            Format strictly as:
-**🌍 Top Global Platforms:**
+Format strictly as:
+
+**Top Global Platforms:**
 - [Portal Name]: [Why it's good for this role]
 
-**🇮🇳 Best for India / Remote:**
+**Best for India / Remote:**
 - [Portal Name]: [Why it's good]
 
-**🎯 Niche/Specialized Boards:**
+**Niche/Specialized Boards:**
 - [Portal Name]: [Why it's good]
 
-**💡 Quick Search Keywords:** [2-3 keywords to search on these portals]
+**Quick Search Keywords:** [2-3 keywords to search on these portals]
 
 ---
 Job Description:
@@ -248,11 +251,17 @@ ${jobDescription}`
             data: response.text
         });
 
-        } catch (error) {
+    } catch (error) {
         console.error("PORTALS ERROR:", error);
-        res.status(500).json({ error: "Failed to find job portals" });
+        res.status(500).json({ error: "Failed to find job portals." });
     }
 };
 
 // ✅ FINAL EXPORT
-module.exports = { generateResumeAndRoadmap, analyzeResumeMatch, generateInterviewQuestions, buildTailoredResume, findJobPortals };
+module.exports = { 
+    generateResumeAndRoadmap, 
+    analyzeResumeMatch, 
+    generateInterviewQuestions, 
+    buildTailoredResume, 
+    findJobPortals 
+};
