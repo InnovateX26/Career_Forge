@@ -203,10 +203,11 @@ const speakText = (text) => {
               }}
             >
             {isSpeaking ? '⏹️ Stop AI HR' : '▶️ Listen to AI HR'}
-
             </button>
-
+          </div>
+          <p>{questions}</p> 
         </div>
+      )}
 
 
 
