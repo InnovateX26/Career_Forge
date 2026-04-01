@@ -146,3 +146,17 @@ function App() {
     } 
     setLoading(false);
   };
+
+  const handleGenerateQuestions = async () => {
+    if (!jd) return alert("Please enter the Job Description first.");
+    
+    setLoadingQ(true); setQuestions(""); stopSpeaking(); 
+    try {
+      const response = await axios.post("http://localhost:5000/api/resume/questions", { jobDescription: jd });
+      setQuestions(response.data.data);
+    } catch (error) { 
+      console.error("API Error:", error.response?.data || error.message);
+      alert("Backend Error: " + (error.response?.data?.error || "Something went wrong.")); 
+    }
+    setLoadingQ(false);
+  };
