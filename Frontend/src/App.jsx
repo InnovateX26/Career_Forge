@@ -56,6 +56,10 @@ function App() {
       tempContainer.style.fontSize = '14px';
       tempContainer.style.lineHeight = '1.6';
 
+      const opt = {
+        margin:       15,
+      filename:     'CareerCraft_Tailored_Resume.pdf',
+
   const downloadPDF = () => {
     window.print();
   };
