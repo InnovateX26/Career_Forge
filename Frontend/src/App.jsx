@@ -75,6 +75,11 @@ function App() {
       return;
     }
 
+    const recognition = new SpeechRecognition();
+    recognition.continuous = false; 
+    recognition.interimResults = false;
+    recognition.lang = 'en-IN';
+
   const downloadPDF = () => {
     window.print();
   };
