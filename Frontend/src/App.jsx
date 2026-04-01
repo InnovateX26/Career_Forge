@@ -13,13 +13,11 @@ function App() {
   const [loadingQ, setLoadingQ] = useState(false);
   
   const handleFileUpload = (e) => {
-    
     const file = e.target.files[0];
     if (!file) return; 
 
     if (file.type === "text/plain") {
       const reader = new FileReader();
-      
       reader.onload = (event) => {
         setResumeText(event.target.result); 
       };
@@ -32,7 +30,6 @@ function App() {
   };
 
   const handleAnalyze = async () => {
-   
     if (!jd) return alert("Please enter Job Description!");
     if (!resumeText) return alert("Please upload or paste your Resume!");
     
@@ -49,9 +46,17 @@ function App() {
     } catch (error) {
       console.error("Error fetching data", error);
       alert("Something went wrong!"); 
+    }
     
     setLoading(false);
   };
+
+  const handleGenerateQuestions = async () => {
+    if (!jd) return alert("Please enter Job Description first!");
+    
+    setLoadingQ(true);
+    setQuestions("");
+
 
   return (
     <div className="container">
