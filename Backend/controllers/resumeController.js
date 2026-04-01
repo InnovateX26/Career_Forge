@@ -117,3 +117,5 @@ ${finalResumeText}`
         });
     }
 };
+
+module.exports = { generateResumeAndRoadmap, analyzeResumeMatch };
