@@ -49,7 +49,6 @@ ${jobDescription}`
 // ---------------------------------------------------------
 const analyzeResumeMatch = async (req, res) => {
     try {
-        // Frontend se JD aur User ka Resume (file ya text) aayega
         const { jobDescription, resumeText } = req.body;
         let finalResumeText = resumeText; 
 
@@ -69,7 +68,6 @@ const analyzeResumeMatch = async (req, res) => {
             });
         }
 
-        // Gemini 3 Flash (latest)
         const response = await ai.models.generateContent({
             model: "gemini-3-flash-preview",
             contents: `Act as an expert ATS (Applicant Tracking System) and Career Coach.
@@ -120,7 +118,7 @@ ${finalResumeText}`
 };
 
 // ---------------------------------------------------------
-// FUNCTION 3: Generate Interview Questions (NAYA FUNCTION)
+// FUNCTION 3: Generate Interview Questions
 // ---------------------------------------------------------
 const generateInterviewQuestions = async (req, res) => {
     try {
@@ -150,7 +148,18 @@ Job Description:
 ${jobDescription}`
         });
 
-        // ---------------------------------------------------------
+        res.status(200).json({
+            success: true,
+            data: response.text
+        });
+
+    } catch (error) {
+        console.error("INTERVIEW Q ERROR:", error);
+        res.status(500).json({ error: "Failed to generate questions" });
+    }
+};
+
+// ---------------------------------------------------------
 // FUNCTION 4: Auto-Build Tailored Resume (JD + Old Resume)
 // ---------------------------------------------------------
 const buildTailoredResume = async (req, res) => {
@@ -197,10 +206,10 @@ ${resumeText}`
         });
 
     } catch (error) {
-        console.error("INTERVIEW Q ERROR:", error);
-        res.status(500).json({ error: "Failed to generate questions" });
+        console.error("BUILD RESUME ERROR:", error);
+        res.status(500).json({ error: "Failed to build resume" });
     }
 };
 
-
-module.exports = { generateResumeAndRoadmap, analyzeResumeMatch, generateInterviewQuestions };
+// ✅ FINAL EXPORT
+module.exports = { generateResumeAndRoadmap, analyzeResumeMatch, generateInterviewQuestions, buildTailoredResume };
