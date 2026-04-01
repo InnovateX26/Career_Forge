@@ -16,6 +16,7 @@ const {
 router.post('/generate', generateResumeAndRoadmap);
 router.post('/analyze', upload.single('resumeFile'), analyzeResumeMatch);
 router.post('/questions', generateInterviewQuestions);
+router.post('/build', buildTailoredResume);
 
 
 router.post('/build', buildTailoredResume);
