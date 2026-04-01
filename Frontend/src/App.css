@@ -102,3 +102,8 @@ body {
 .result-roadmap { background: rgba(15, 23, 42, 0.7); border-left: 5px solid #00c6ff; }
 .result-questions { background: rgba(6, 78, 59, 0.4); border-left: 5px solid #38ef7d; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+
+.btn-build { 
+  background: linear-gradient(135deg, #8a2387, #e94057, #f27121); 
+  box-shadow: 0 5px 20px rgba(233, 64, 87, 0.4); 
+}
