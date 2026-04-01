@@ -134,6 +134,9 @@ body {
 .btn-interview { background: #10b981; color: white; }
 .btn-interview:hover:not(:disabled) { background: #059669; }
 
+.btn-build { background: #8b5cf6; color: white; }
+.btn-build:hover:not(:disabled) { background: #7c3aed; }
+
 /* 🔵 1. Analyze Button */
 .btn-analyze { background: linear-gradient(135deg, #0072ff, #00c6ff); box-shadow: 0 5px 20px rgba(0, 114, 255, 0.4); }
 .btn-analyze:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0, 114, 255, 0.6); }
