@@ -53,6 +53,8 @@ function App() {
       tempContainer.style.color = '#000000';
       tempContainer.style.background = '#ffffff';
       tempContainer.style.fontFamily = 'Arial, sans-serif';
+      tempContainer.style.fontSize = '14px';
+      tempContainer.style.lineHeight = '1.6';
 
   const downloadPDF = () => {
     window.print();
