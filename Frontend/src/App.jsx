@@ -12,10 +12,12 @@ function App() {
   const [questions, setQuestions] = useState("");
   const [loadingQ, setLoadingQ] = useState(false);
 
-  // ✅ NAYA STATE: Auto Resume Builder ke liye
   const [tailoredResume, setTailoredResume] = useState("");
   const [loadingR, setLoadingR] = useState(false);
 
+  // ✅ NAYA STATE: Job Portals ke liye (Ye miss ho gaya tha)
+  const [portals, setPortals] = useState("");
+  const [loadingP, setLoadingP] = useState(false);
 
   const handleFileUpload = (e) => {
     const file = e.target.files[0];
@@ -41,7 +43,6 @@ function App() {
       const response = await axios.post("http://localhost:5000/api/resume/analyze", { jobDescription: jd, resumeText: resumeText });
       setResult(response.data.data);
     } catch (error) { 
-      // 🧠 SMART ERROR HANDLING
       console.error("API Error:", error.response?.data || error.message);
       alert("Backend Error: " + (error.response?.data?.error || "Something went wrong!")); 
     } 
@@ -56,15 +57,30 @@ function App() {
       const response = await axios.post("http://localhost:5000/api/resume/questions", { jobDescription: jd });
       setQuestions(response.data.data);
     } catch (error) { 
-      // 🧠 SMART ERROR HANDLING
       console.error("API Error:", error.response?.data || error.message);
       alert("Backend Error: " + (error.response?.data?.error || "Something went wrong!")); 
     }
     setLoadingQ(false);
   };
 
+  // ✅ RESTORED: Auto-Build Resume Function (Ye delete ho gaya tha)
   const handleBuildResume = async () => {
-   const handleFindPortals = async () => {
+    if (!jd) return alert("Please enter the Job Description first!");
+    if (!resumeText) return alert("Please upload or paste your Current Resume!");
+    
+    setLoadingR(true); setTailoredResume(""); 
+    try {
+      const response = await axios.post("http://localhost:5000/api/resume/build", { jobDescription: jd, resumeText: resumeText });
+      setTailoredResume(response.data.data);
+    } catch (error) { 
+      console.error("API Error:", error.response?.data || error.message);
+      alert("Backend Error: " + (error.response?.data?.error || "Check backend terminal, server might be down!")); 
+    }
+    setLoadingR(false);
+  };
+
+  // ✅ FIXED: Job Portals Function
+  const handleFindPortals = async () => {
     if (!jd) return alert("Please enter the Job Description first!");
     
     setLoadingP(true); setPortals(""); 
@@ -130,7 +146,6 @@ function App() {
           {loadingP && <span className="spinner"></span>}
           {loadingP ? "Searching..." : "Find Job Portals 🌍"}
         </button>
-
       </div>
 
       {/* AI Results */}
@@ -154,15 +169,16 @@ function App() {
           <p>{tailoredResume}</p> 
         </div>
       )}
-    </div>
-  );
-}
 
-{portals && (
+      {/* ✅ FIXED: Ye block component ke bahar tha, ab andar aa gaya */}
+      {portals && (
         <div className="result-box result-portals">
           <h3 style={{ color: '#fcd34d', marginTop: 0 }}>🌍 Best Platforms to Apply:</h3>
           <p>{portals}</p> 
         </div>
       )}
+    </div>
+  );
+}
 
 export default App;
