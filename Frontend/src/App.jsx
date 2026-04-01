@@ -97,6 +97,11 @@ function App() {
     recognition.start();
   };
 
+  const speakText = (text) => {
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.cancel(); 
+      const cleanText = text.replace(/[*#_]/g, '');
+
 
 
   const downloadPDF = () => {
