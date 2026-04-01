@@ -41,6 +41,11 @@ function App() {
   };
 
   const downloadPDF = () => {
+  const tempContainer = document.createElement('div');
+
+    tempContainer.innerHTML = tailoredResume
+      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\n/g, '<br/>');
 
   const downloadPDF = () => {
     window.print();
