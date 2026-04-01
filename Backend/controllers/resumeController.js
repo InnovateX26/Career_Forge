@@ -215,6 +215,12 @@ ${resumeText}`
 // FUNCTION 5: Find Relevant Job Portals (NAYA FEATURE)
 // ---------------------------------------------------------
 const findJobPortals = async (req, res) => {
+    try {
+        const { jobDescription } = req.body;
+
+        if (!jobDescription) {
+            return res.status(400).json({ error: "Job Description is required to find portals." });
+        }
 
 // ✅ FINAL EXPORT
 module.exports = { generateResumeAndRoadmap, analyzeResumeMatch, generateInterviewQuestions, buildTailoredResume };
