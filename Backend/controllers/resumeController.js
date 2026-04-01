@@ -243,6 +243,13 @@ Job Description:
 ${jobDescription}`
         });
 
-        
+        res.status(200).json({
+            success: true,
+            data: response.text
+        });
+
+
+
+
 // ✅ FINAL EXPORT
 module.exports = { generateResumeAndRoadmap, analyzeResumeMatch, generateInterviewQuestions, buildTailoredResume };
