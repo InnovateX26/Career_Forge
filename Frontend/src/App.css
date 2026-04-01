@@ -157,6 +157,8 @@ body {
 .result-box {
   margin-top: 25px;
   padding: 20px;
+  border-radius: 8px;
+  white-space: pre-wrap;
 
 /* 🔵 1. Analyze Button */
 .btn-analyze { background: linear-gradient(135deg, #0072ff, #00c6ff); box-shadow: 0 5px 20px rgba(0, 114, 255, 0.4); }
