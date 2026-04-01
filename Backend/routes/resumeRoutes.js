@@ -2,14 +2,23 @@ const express = require('express');
 const router = express.Router();
 const multer = require('multer');
 
-// File ko memory mein save karne ke liye multer setup
+// Setup multer for file upload
 const upload = multer({ storage: multer.memoryStorage() });
 
-const { generateResumeAndRoadmap, analyzeResumeMatch } = require('../controllers/resumeController');
+// ✅ SAATHE 5 FUNCTIONS KO SAHI SE IMPORT KIYA HAI
+const { 
+    generateResumeAndRoadmap, 
+    analyzeResumeMatch, 
+    generateInterviewQuestions,
+    buildTailoredResume,
+    findJobPortals 
+} = require('../controllers/resumeController');
 
+// ✅ PAACHO (5) RAASTE (ROUTES) EK SATH DEFINE KIYE HAIN
 router.post('/generate', generateResumeAndRoadmap);
-
-// ✅ Yahan 'upload.single' add kiya taaki file receive ho sake
 router.post('/analyze', upload.single('resumeFile'), analyzeResumeMatch);
+router.post('/questions', generateInterviewQuestions);
+router.post('/build', buildTailoredResume);
+router.post('/portals', findJobPortals);
 
 module.exports = router;
