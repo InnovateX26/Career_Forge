@@ -107,3 +107,7 @@ body {
   background: linear-gradient(135deg, #8a2387, #e94057, #f27121); 
   box-shadow: 0 5px 20px rgba(233, 64, 87, 0.4); 
 }
+.btn-build:hover { 
+  transform: translateY(-3px); 
+  box-shadow: 0 8px 25px rgba(233, 64, 87, 0.6); 
+}
