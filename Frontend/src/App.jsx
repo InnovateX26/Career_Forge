@@ -15,9 +15,11 @@ function App() {
   const [tailoredResume, setTailoredResume] = useState("");
   const [loadingR, setLoadingR] = useState(false);
 
-  // ✅ NAYA STATE: Job Portals ke liye (Ye miss ho gaya tha)
+  
   const [portals, setPortals] = useState("");
   const [loadingP, setLoadingP] = useState(false);
+
+const [isSpeaking, setIsSpeaking] = useState(false);
 
   const handleFileUpload = (e) => {
     const file = e.target.files[0];
