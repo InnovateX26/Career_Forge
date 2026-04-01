@@ -41,6 +41,8 @@ function App() {
   };
 
   const downloadPDF = () => {
+
+  const downloadPDF = () => {
     window.print();
   };
 
