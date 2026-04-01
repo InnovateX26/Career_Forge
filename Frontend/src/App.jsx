@@ -122,6 +122,14 @@ function App() {
           {loadingQ ? "Generating Questions..." : "Get Interview Questions 🎯"}
         </button>
       </div>
+
+      {/* 4. AI Result Section (Roadmap) */}
+      {result && (
+        <div style={{ whiteSpace: 'pre-wrap', textAlign: 'left', padding: '20px', marginTop: '30px', backgroundColor: '#1e1e1e', borderRadius: '8px', border: '1px solid #444' }}>
+          <h3>ATS Analysis & Career Roadmap:</h3>
+          <p>{result}</p> 
+        </div>
+      )}
       
       {/* 3. Analyze Button */}
       
