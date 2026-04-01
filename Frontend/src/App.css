@@ -77,7 +77,11 @@ body {
   transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-.input-box:focus { border-color: #00c6ff; box-shadow: 0 0 15px rgba(0, 198, 255, 0.3); }
+.input-box:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
 
 /* 📁 File Input & Choose File Button */
 .file-input { margin-bottom: 15px; color: #94a3b8; }
