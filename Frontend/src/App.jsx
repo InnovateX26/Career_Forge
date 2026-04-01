@@ -52,6 +52,7 @@ function App() {
       tempContainer.style.padding = '30px';
       tempContainer.style.color = '#000000';
       tempContainer.style.background = '#ffffff';
+      tempContainer.style.fontFamily = 'Arial, sans-serif';
 
   const downloadPDF = () => {
     window.print();
