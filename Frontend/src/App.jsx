@@ -59,6 +59,7 @@ function App() {
       const opt = {
         margin:       15,
       filename:     'CareerCraft_Tailored_Resume.pdf',
+      image:        { type: 'jpeg', quality: 1 },
 
   const downloadPDF = () => {
     window.print();
