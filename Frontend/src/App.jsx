@@ -87,6 +87,11 @@ function App() {
       setJd((prevJd) => prevJd ? prevJd + " " + transcript : transcript);
     };
 
+    recognition.onerror = (event) => {
+      console.error("Mic Error:", event.error);
+      setIsListening(false);
+    };
+
 
 
   const downloadPDF = () => {
