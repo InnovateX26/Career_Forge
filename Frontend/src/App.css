@@ -140,6 +140,12 @@ body {
 .btn-portals { background: #f59e0b; color: white; }
 .btn-portals:hover:not(:disabled) { background: #d97706; }
 
+
+/* 🌀 Spinner */
+.spinner {
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+
 /* 🔵 1. Analyze Button */
 .btn-analyze { background: linear-gradient(135deg, #0072ff, #00c6ff); box-shadow: 0 5px 20px rgba(0, 114, 255, 0.4); }
 .btn-analyze:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0, 114, 255, 0.6); }
