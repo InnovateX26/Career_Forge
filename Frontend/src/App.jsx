@@ -38,6 +38,10 @@ const speakText = (text) => {
     utterance.onerror = () => setIsSpeaking(false);
 
     window.speechSynthesis.speak(utterance);
+    } else {
+      alert("Oops! Tumhara browser Voice feature support nahi karta.");
+    }
+  };
 
   const handleFileUpload = (e) => {
     const file = e.target.files[0];
