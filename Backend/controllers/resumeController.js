@@ -150,6 +150,17 @@ Job Description:
 ${jobDescription}`
         });
 
+        // ---------------------------------------------------------
+// FUNCTION 4: Auto-Build Tailored Resume (JD + Old Resume)
+// ---------------------------------------------------------
+const buildTailoredResume = async (req, res) => {
+    try {
+        const { jobDescription, resumeText } = req.body;
+
+        if (!jobDescription || !resumeText) {
+            return res.status(400).json({ error: "Job Description and Current Resume both are required to tailor it." });
+        }
+
         res.status(200).json({
             success: true,
             data: response.text
